@@ -108,6 +108,9 @@ export class GeometryDatabase implements DatabaseLike, MementoOriginator<Geometr
     }
 
     private precisionAndDistanceFor(item: c3d.Item, mode: 'real' | 'temporary' = 'real'): [number, number][] {
+        if (item == null){
+            return other_precision_distance
+        }
         if (item.IsA() === c3d.SpaceType.Solid) {
             return mode === 'real' ? mesh_precision_distance : temporary_precision_distance;
         } else {
@@ -263,6 +266,9 @@ export class GeometryDatabase implements DatabaseLike, MementoOriginator<Geometr
 
     private async meshes(obj: c3d.Item, id: c3d.SimpleName, precision_distance: [number, number][], includeMetadata: boolean, materials?: MaterialOverride): Promise<build.Builder<visual.SpaceInstance<visual.Curve3D | visual.Surface> | visual.Solid | visual.PlaneInstance<visual.Region>>> {
         let builder;
+        if (obj == null){
+            throw new Error(`not yet supported`);
+        }
         switch (obj.IsA()) {
             case c3d.SpaceType.SpaceInstance:
                 builder = new build.SpaceInstanceBuilder<visual.Curve3D | visual.Surface>();
@@ -287,6 +293,9 @@ export class GeometryDatabase implements DatabaseLike, MementoOriginator<Geometr
     }
 
     private async object2mesh(builder: Builder, obj: c3d.Item, id: c3d.SimpleName, sag: number, distance: number, includeMetadata: boolean, materials?: MaterialOverride): Promise<void> {
+        if (obj == null){
+            throw new Error(`not yet supported`);
+        }
         const stepData = new c3d.StepData(c3d.StepType.SpaceStep, sag);
         const stats = Measure.get("create-mesh");
         stats.begin();

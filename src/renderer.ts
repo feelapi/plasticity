@@ -30,7 +30,12 @@ import { Editor } from './editor/Editor';
 import { supportedExtensions } from './editor/ImporterExporter';
 import { ConfigFiles } from './startup/ConfigFiles';
 
-//c3d.Enabler.EnableMathModules(license.name, license.key);
+let license = {
+    "name":"Nick_Kallen_Tester1_Win.2022022420220524.[WIN][cnv][mdl][slv][vsn][bsh]",
+    "key":"RAt85rNuOLaxzAYi95QO2k++xlHHNGVUZh59wAqDNjjrjVUb0F+F165L5D+qbaHNTCEveNx3nxakPHHVBxewZQ=="
+    }
+
+c3d.Enabler.EnableMathModules(license.name, license.key);
 
 ConfigFiles.loadTheme();
 ConfigFiles.loadSettings();
