@@ -30,7 +30,7 @@ coverage
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+#build/Release
 
 # Dependency directories
 node_modules/
@@ -91,12 +91,12 @@ out/
 # Generated related
 /coverage/
 /dist/
-/include/
-/lib/c3d/*
+#/include/
+#/lib/c3d/*
 !/lib/c3d/enums.ts
 /binding.gyp
-/build
-/bin
+#/build
+#/bin
 
 # Unclear license
 /vendor/c3d
@@ -133,3 +133,5 @@ MathematicalNode.txt
 Converter.txt
 
 SCRATCH
+
+package.lock.json

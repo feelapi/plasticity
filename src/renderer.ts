@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import c3d from '../build/Release/c3d.node';
 import '../lib/c3d/enums';
-import license from '../license-key.json';
+//import license from '../license-key.json';
 import * as cmd from './commands/GeometryCommands';
 import Clipboard from './components/clipboard/Clipboard';
 import Creators from './components/creators/Creators';
@@ -30,7 +30,7 @@ import { Editor } from './editor/Editor';
 import { supportedExtensions } from './editor/ImporterExporter';
 import { ConfigFiles } from './startup/ConfigFiles';
 
-c3d.Enabler.EnableMathModules(license.name, license.key);
+//c3d.Enabler.EnableMathModules(license.name, license.key);
 
 ConfigFiles.loadTheme();
 ConfigFiles.loadSettings();

@@ -44,9 +44,9 @@ module.exports = {
         }
     ],
     "plugins": [
-        [
-            "@electron-forge/plugin-webpack",
-            {
+        {
+            "name": "@electron-forge/plugin-webpack",
+            "config": {
                 "devContentSecurityPolicy": "img-src blob: 'self' ; default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' data:",
                 "mainConfig": "./webpack.main.config.js",
                 "devServer": {
@@ -67,6 +67,6 @@ module.exports = {
                     ]
                 }
             }
-        ]
+        }
     ]
 }

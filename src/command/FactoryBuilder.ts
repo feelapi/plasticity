@@ -6,7 +6,7 @@ import { SolidCopierPool } from '../editor/SolidCopier';
 
 function _delegate(initial?: any) {
     return function <T extends GeometryFactory>(target: GeometryFactory & { factories: T[] }, propertyKey: keyof T) {
-        const privatePropertyKey = '_' + propertyKey;
+        const privatePropertyKey = '_' + propertyKey.toString();
         if (!('delegated' in target)) Object.defineProperty(target, 'delegated', { value: [], writable: false });
         ((target as any)['delegated'] as (keyof T)[]).push(propertyKey);
         Object.defineProperty(target, privatePropertyKey, { value: initial, writable: true })
@@ -112,6 +112,6 @@ export function derive<T extends Derivable>(type: T) {
                 }
                 break;
         }
-        Object.defineProperty(target, '_' + propertyKey, { value: {}, writable: true });
+        Object.defineProperty(target, '_' + propertyKey.toString(), { value: {}, writable: true });
     }
 }
