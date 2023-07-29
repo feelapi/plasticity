@@ -134,5 +134,5 @@ Converter.txt
 
 SCRATCH
 
-package-lock.json
+/package-lock.json
 yarn.lock
