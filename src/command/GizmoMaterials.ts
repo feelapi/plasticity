@@ -7,7 +7,6 @@ import theme from '../startup/default-theme';
 const depthInfo: THREE.MaterialParameters = {
     depthTest: true,
     depthWrite: true,
-    fog: false,
     toneMapped: false,
     transparent: true,
     polygonOffset: true,
@@ -27,7 +26,7 @@ export interface GizmoMaterial extends ActiveGizmoMaterial {
 
 export class GizmoMaterialDatabase {
 
-    static make(normalColor: THREE.Color, hoverColor: THREE.Color, side = THREE.FrontSide): GizmoMaterial {
+    static make(normalColor: THREE.Color, hoverColor: THREE.Color, side: number = THREE.FrontSide): GizmoMaterial {
         return {
             mesh: new THREE.MeshBasicMaterial(Object.assign({ opacity: 0.75, color: normalColor }, depthInfo, { side })),
             line2: new LineMaterial({ ...depthInfo, color: normalColor.getHex(), opacity: 1, linewidth: 2, side }),
