@@ -174,8 +174,6 @@ export class Viewport implements MementoOriginator<ViewportMemento> {
         }));
 
         this.scene.background = this.backgroundColor;
-        this.scene.autoUpdate = false;
-        this.helpersScene.autoUpdate = false;
         this.multiplexer.push(this.points, this.selector);
     }
 
@@ -731,7 +729,6 @@ function makeRenderTarget(renderer: THREE.WebGLRenderer): THREE.WebGLRenderTarge
     if (process.platform === 'linux') {
         // Linux seems to require an explicity float depth texture otherwise there are zbuffer artifacts
         const depthTexture = new THREE.DepthTexture(size.width, size.height, THREE.FloatType);
-        // @ts-expect-error('three.js @types are out of date')
         return new THREE.WebGLRenderTarget(size.width, size.height, { type: THREE.FloatType, generateMipmaps: false, samples: 4, depthTexture });
     } else {
         const gl = renderer.getContext();
@@ -741,10 +738,8 @@ function makeRenderTarget(renderer: THREE.WebGLRenderer): THREE.WebGLRenderTarge
         // Since we render in Linear/HDR we need at least HalfFloatType for the buffer to avoid banding.
         // Unfortunately, the 
         if (device === "Apple M1") {
-            // @ts-expect-error('three.js @types are out of date')
             return new THREE.WebGLRenderTarget(size.width, size.height, { type: THREE.HalfFloatType, generateMipmaps: false, samples: 1 });
         } else {
-            // @ts-expect-error('three.js @types are out of date')
             return new THREE.WebGLRenderTarget(size.width, size.height, { type: THREE.HalfFloatType, generateMipmaps: false, samples: 4 });
         }
     }

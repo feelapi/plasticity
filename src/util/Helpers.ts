@@ -74,7 +74,7 @@ export class Helpers {
         axes.position.set(0, 0, 0.01);
         const material = axes.material as THREE.Material;
         material.depthFunc = THREE.AlwaysDepth;
-        material.fog = false;
+        //material.fog = false;
 
         axes.setColors(
             new THREE.Color(styles.colors.red[600]).convertSRGBToLinear(),

@@ -18,7 +18,7 @@ import { toArray } from "../util/Conversion";
  */
 
 export abstract class AbstractFactory<T extends THREE.Object3D> extends CancellableRegisterable {
-    protected get originalItem(): T | T[] | undefined { return undefined; }
+    get originalItem(): T | T[] | undefined { return undefined; }
     protected get originalItems() { return toArray(this.originalItem); }
     protected temps: TemporaryObject[] = [];
 

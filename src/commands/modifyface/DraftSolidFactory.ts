@@ -53,7 +53,7 @@ export class DraftSolidFactory extends GeometryFactory implements RotateFactoryL
         return await c3d.ActionSolid.DraftSolid_async(solid, c3d.CopyMode.Copy, placement, angle, faces, c3d.FacePropagation.All, false, names);
     }
 
-    protected get originalItem() { return this.solid }
+    get originalItem() { return this.solid }
 
     private _phantom?: TemporaryObject;
     async showPhantoms() {

@@ -322,7 +322,7 @@ export class MultiBooleanFactory extends MultiGeometryFactory<MovingBooleanFacto
         return this.showTemps(temps);
     }
 
-    protected get originalItem(): visual.Item[] {
+    get originalItem(): visual.Item[] {
         const tools = this.keepTools ? [] : this._tools.views;
         return [...this._targets.views, ...tools];
     }

@@ -64,6 +64,11 @@ const createWindow = () => {
     });
 
     buildMenu(mainWindow);
+
+      // Open the DevTools
+    mainWindow.once('ready-to-show', () => {
+        mainWindow?.webContents.openDevTools({ mode: 'detach' })
+    })
 };
 
 ipcMain.handle('reload', async (event, args) => {

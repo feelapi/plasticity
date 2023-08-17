@@ -400,7 +400,8 @@ const _v1 = new THREE.Vector3();
 const _clipToWorldVector = new THREE.Vector4();
 const _box = new THREE.Box3();
 const _lineSegments = new LineSegments2();
-const _instanceBuffer = new THREE.InstancedInterleavedBuffer([], 6, 1); // xyz, xyz
+const _instanceArray: THREE.TypedArray = new Float32Array();
+const _instanceBuffer = new THREE.InstancedInterleavedBuffer(_instanceArray, 6, 1); // xyz, xyz
 const _lineSegmentsGeometry = new LineSegmentsGeometry();
 _lineSegmentsGeometry.setAttribute('instanceStart', new THREE.InterleavedBufferAttribute(_instanceBuffer, 3, 0)); // xyz
 _lineSegmentsGeometry.setAttribute('instanceEnd', new THREE.InterleavedBufferAttribute(_instanceBuffer, 3, 3)); // xyz

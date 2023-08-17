@@ -53,7 +53,7 @@ export class ViewportNavigatorGizmo extends THREE.Object3D {
             const boxGeometry = new THREE.BoxGeometry(2 * halfSize, 2 * halfSize, 2 * halfSize);
             const box = new THREE.Mesh(boxGeometry, ViewportNavigatorExecutor.getBoxMaterial(new THREE.Color('#AAAAAA')));
 
-            const planeGeometry = new THREE.BufferGeometry(1.5 * halfSize, 1.5 * halfSize);
+            const planeGeometry = new THREE.BufferGeometry(/*1.5 * halfSize, 1.5 * halfSize*/);
 
             const front = new THREE.Mesh(planeGeometry, ViewportNavigatorExecutor.getPlaneMaterial(new THREE.Color('#777777')));
             front.rotation.x = Math.PI / 2;

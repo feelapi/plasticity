@@ -41,7 +41,7 @@ abstract class HoleFactory extends GeometryFactory implements HoleParams {
         return result;
     }
 
-    protected get originalItem() {
+    get originalItem() {
         return this.solid;
     }
 }

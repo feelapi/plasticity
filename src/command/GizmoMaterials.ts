@@ -29,7 +29,7 @@ export class GizmoMaterialDatabase {
     static make(normalColor: THREE.Color, hoverColor: THREE.Color, side: number = THREE.FrontSide): GizmoMaterial {
         return {
             mesh: new THREE.MeshBasicMaterial(Object.assign({ opacity: 0.75, color: normalColor }, depthInfo, { side })),
-            line2: new LineMaterial({ ...depthInfo, color: normalColor.getHex(), opacity: 1, linewidth: 2, side }),
+            line2: new LineMaterial({ ...depthInfo, color: normalColor.getHex(), opacity: 1, linewidth: 2 }),
             line: new THREE.LineBasicMaterial({ opacity: 0.75, color: normalColor }),
             hover: {
                 mesh: new THREE.MeshBasicMaterial(Object.assign({ opacity: 1, color: hoverColor }, depthInfo, { side })),

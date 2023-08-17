@@ -7,7 +7,7 @@ export interface FactoryHelpers {
 
 export type MultiplyableFactory = GeometryFactory & FactoryHelpers;
 
-export class MultiGeometryFactory<T extends MultiplyableFactory> extends GeometryFactory {
+export class MultiGeometryFactory<T extends GeometryFactory> extends GeometryFactory {
     factories: T[] = [];
 
     async calculate() {
@@ -28,7 +28,7 @@ export class MultiGeometryFactory<T extends MultiplyableFactory> extends Geometr
         return (await Promise.all(result)).flat();
     }
 
-    protected get originalItem(): visual.Item[] {
+    get originalItem(): visual.Item[] {
         let result: visual.Item[] = [];
         for (const i of this.factories) {
             const original = i.originalItem;

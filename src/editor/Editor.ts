@@ -43,7 +43,7 @@ import { SnapManager } from './snaps/SnapManager';
 import { SolidCopier } from "./SolidCopier";
 import { TextureLoader } from "./TextureLoader";
 
-THREE.Object3D.DefaultUp = Z;
+THREE.Object3D.DEFAULT_UP = Z;
 
 export class Editor {
     private readonly disposable = new CompositeDisposable();

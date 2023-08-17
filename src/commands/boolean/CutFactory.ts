@@ -325,7 +325,7 @@ export class MultiCutFactory extends GeometryFactory implements CutParams {
         return (await Promise.all(promises)).flat();
     }
 
-    protected get originalItem() {
+    get originalItem() {
         return this.solids;
     }
 }

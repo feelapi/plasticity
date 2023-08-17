@@ -1,12 +1,14 @@
 import { SelectionMemento } from "../editor/History";
 import { ControlPoint, Curve3D, CurveEdge, Face, Item, PlaneInstance, Region, Solid, SpaceInstance, TopologyItem } from "../visual_model/VisualModel";
 import { ModifiesSelection, Selectable } from "./SelectionDatabase";
+import { Empty } from '../editor/Empties';
+import { Group } from '../editor/Groups';
 
 export class SelectionProxy implements ModifiesSelection {
     constructor(protected readonly selection: ModifiesSelection) { }
 
     has(item: Item) { return this.selection.has(item); }
-    add(items: Item | Item[] | TopologyItem[]) { this.selection.add(items); }
+    add(_items: Selectable | Selectable[]) { /*this.selection.add(items);*/ }
     remove(selectables: Selectable[]) { this.selection.remove(selectables); }
     removeFace(object: Face) { this.selection.removeFace(object); }
     addFace(object: Face) { this.selection.addFace(object); }
@@ -41,4 +43,12 @@ export class SelectionProxy implements ModifiesSelection {
     get regionIds() { return this.selection.regionIds }
     get curveIds() { return this.selection.curveIds }
     get controlPointIds() { return this.selection.controlPointIds }
+    get groups() { return this.selection.groups }
+    get empties() { return this.selection.empties }
+
+    removeGroup(group: Group): void {}
+    addGroup(group: Group): void {}
+
+    removeEmpty(empty: Empty): void {}
+    addEmpty(empty: Empty): void {}
 }

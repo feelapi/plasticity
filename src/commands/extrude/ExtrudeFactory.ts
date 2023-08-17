@@ -170,7 +170,7 @@ export class PossiblyBooleanExtrudeFactory extends PossiblyBooleanFactory<Abstra
     @delegate.get center!: THREE.Vector3;
     @delegate.get direction!: THREE.Vector3;
 
-    get defaultOperationType() { return this.fantom.defaultOperationType }
+    //get defaultOperationType() { return this.fantom.defaultOperationType }
 }
 
 export class PossiblyBooleanFaceExtrudeFactory extends PossiblyBooleanExtrudeFactory {
