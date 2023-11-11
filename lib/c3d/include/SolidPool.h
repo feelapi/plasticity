@@ -10,7 +10,7 @@
 
 class SolidDuplicate
 {
-public:
+  public:
     SolidDuplicate(MbSolid &copy, const MbSolid &original) : copy(copy)
     {
         copy.AddRef();
@@ -70,13 +70,13 @@ public:
     uint64_t *originalEdgeIds;
     uint64_t *copyEdgeIds;
 
-private:
+  private:
     MbSolid &copy;
 };
 
 class SolidPool
 {
-public:
+  public:
     SolidPool(MbSolid &original) : original(original)
     {
         original.AddRef();
@@ -123,7 +123,7 @@ public:
         return copies.size();
     }
 
-private:
+  private:
     const MbSolid &original;
     std::mutex mutex;
 

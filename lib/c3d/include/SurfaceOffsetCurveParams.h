@@ -14,25 +14,19 @@
 #include "SNameMaker.h"
 #include "PromiseWorker.h"
 
-class SurfaceOffsetCurveParams : public
-  Napi::ObjectWrap<SurfaceOffsetCurveParams>
+class SurfaceOffsetCurveParams : public Napi::ObjectWrap<SurfaceOffsetCurveParams>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbSurfaceOffsetCurveParams *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        SurfaceOffsetCurveParams(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbSurfaceOffsetCurveParams *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    SurfaceOffsetCurveParams(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbSurfaceOffsetCurveParams * _underlying;
-
-
+    MbSurfaceOffsetCurveParams *_underlying;
 
   private:
-
 };
-
-
 
 #endif

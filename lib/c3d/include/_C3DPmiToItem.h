@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class _C3DPmiToItem : public
-  Napi::ObjectWrap<_C3DPmiToItem>
+class _C3DPmiToItem : public Napi::ObjectWrap<_C3DPmiToItem>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, C3DPmiToItem *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        _C3DPmiToItem(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, C3DPmiToItem *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    _C3DPmiToItem(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    C3DPmiToItem * _underlying;
-
-
+    C3DPmiToItem *_underlying;
 
   private:
-
 };
-
-
 
 #endif

@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class Rect1D : public
-  Napi::ObjectWrap<Rect1D>
+class Rect1D : public Napi::ObjectWrap<Rect1D>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbRect1D *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        Rect1D(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbRect1D *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    Rect1D(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbRect1D * _underlying;
-
-
+    MbRect1D *_underlying;
 
   private:
-
 };
-
-
 
 #endif

@@ -394,10 +394,11 @@
 
 #include "./include/Conversion.h"
 
-Napi::Object Init(Napi::Env env, Napi::Object exports) {
-    Napi::ObjectReference * ref = new Napi::ObjectReference();
-    * ref = Napi::Persistent(exports);
-    env.SetInstanceData < Napi::ObjectReference > (ref);
+Napi::Object Init(Napi::Env env, Napi::Object exports)
+{
+    Napi::ObjectReference *ref = new Napi::ObjectReference();
+    *ref = Napi::Persistent(exports);
+    env.SetInstanceData<Napi::ObjectReference>(ref);
 
     RefItem::Init(env, exports);
     Function::Init(env, exports);

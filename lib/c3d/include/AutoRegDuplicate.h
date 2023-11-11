@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class AutoRegDuplicate : public
-  Napi::ObjectWrap<AutoRegDuplicate>
+class AutoRegDuplicate : public Napi::ObjectWrap<AutoRegDuplicate>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbAutoRegDuplicate *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        AutoRegDuplicate(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbAutoRegDuplicate *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    AutoRegDuplicate(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbAutoRegDuplicate * _underlying;
-
-
+    MbAutoRegDuplicate *_underlying;
 
   private:
-
 };
-
-
 
 #endif

@@ -17,182 +17,144 @@
 
 #include "PromiseWorker.h"
 
-class Action : public
-  Napi::ObjectWrap<Action>
+class Action : public Napi::ObjectWrap<Action>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value IsSolidsIntersectionFast(const Napi::CallbackInfo& info);
-        static Napi::Value IsSolidsIntersectionFast_async(const Napi::CallbackInfo& info);
-        static Napi::Value IsSolidsIntersection(const Napi::CallbackInfo& info);
-        static Napi::Value IsSolidsIntersection_async(const Napi::CallbackInfo& info);
-        static Napi::Value MinimumSolidsDistance(const Napi::CallbackInfo& info);
-        static Napi::Value MinimumSolidsDistance_async(const Napi::CallbackInfo& info);
-        static Napi::Value FindFilletFaces(const Napi::CallbackInfo& info);
-        static Napi::Value FindFilletFaces_async(const Napi::CallbackInfo& info);
-        static Napi::Value GetDistanceToCube(const Napi::CallbackInfo& info);
-        static Napi::Value GetDistanceToCube_async(const Napi::CallbackInfo& info);
+    static Napi::Value IsSolidsIntersectionFast(const Napi::CallbackInfo &info);
+    static Napi::Value IsSolidsIntersectionFast_async(const Napi::CallbackInfo &info);
+    static Napi::Value IsSolidsIntersection(const Napi::CallbackInfo &info);
+    static Napi::Value IsSolidsIntersection_async(const Napi::CallbackInfo &info);
+    static Napi::Value MinimumSolidsDistance(const Napi::CallbackInfo &info);
+    static Napi::Value MinimumSolidsDistance_async(const Napi::CallbackInfo &info);
+    static Napi::Value FindFilletFaces(const Napi::CallbackInfo &info);
+    static Napi::Value FindFilletFaces_async(const Napi::CallbackInfo &info);
+    static Napi::Value GetDistanceToCube(const Napi::CallbackInfo &info);
+    static Napi::Value GetDistanceToCube_async(const Napi::CallbackInfo &info);
 };
 
+class Action_IsSolidsIntersectionFast_AsyncWorker : public PromiseWorker
+{
+  public:
+    Action_IsSolidsIntersectionFast_AsyncWorker(Napi::Promise::Deferred const &d, const MbSolid &solid1,
+                                                const MbSolid &solid2, const MbSNameMaker &names);
+    virtual ~Action_IsSolidsIntersectionFast_AsyncWorker(){};
 
-  class Action_IsSolidsIntersectionFast_AsyncWorker : public PromiseWorker {
-      public:
-          Action_IsSolidsIntersectionFast_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbSolid & solid1,
-                                const MbSolid & solid2,
-                                const MbSNameMaker & names);
-          virtual ~Action_IsSolidsIntersectionFast_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    const MbSolid &solid1;
+    const MbSolid &solid2;
+    const MbSNameMaker &names;
 
-      private:
-                        const MbSolid & solid1;
-                        const MbSolid & solid2;
-                        const MbSNameMaker & names;
+    bool _result;
 
-                
-                 bool  _result;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class Action_IsSolidsIntersection_AsyncWorker : public PromiseWorker
+{
+  public:
+    Action_IsSolidsIntersection_AsyncWorker(Napi::Promise::Deferred const &d, const MbSolid &solid1,
+                                            const MbMatrix3D &matr1, const MbSolid &solid2, const MbMatrix3D &matr2,
+                                            bool checkTangent, bool getIntersectionSolids, bool checkTouchPoints);
+    virtual ~Action_IsSolidsIntersection_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class Action_IsSolidsIntersection_AsyncWorker : public PromiseWorker {
-      public:
-          Action_IsSolidsIntersection_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbSolid & solid1,
-                                const MbMatrix3D & matr1,
-                                const MbSolid & solid2,
-                                const MbMatrix3D & matr2,
-                                 bool  checkTangent,
-                                 bool  getIntersectionSolids,
-                                 bool  checkTouchPoints);
-          virtual ~Action_IsSolidsIntersection_AsyncWorker() {};
+  private:
+    const MbSolid &solid1;
+    const MbMatrix3D &matr1;
+    const MbSolid &solid2;
+    const MbMatrix3D &matr2;
+    bool checkTangent;
+    bool getIntersectionSolids;
+    bool checkTouchPoints;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    bool isIntersection;
 
-      private:
-                        const MbSolid & solid1;
-                        const MbMatrix3D & matr1;
-                        const MbSolid & solid2;
-                        const MbMatrix3D & matr2;
-                         bool  checkTangent;
-                         bool  getIntersectionSolids;
-                         bool  checkTouchPoints;
+    RPArray<MbShellsIntersectionData> *intData;
 
-                
-                 bool  isIntersection;
-                
-                
-                 RPArray<MbShellsIntersectionData> * intData;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class Action_MinimumSolidsDistance_AsyncWorker : public PromiseWorker
+{
+  public:
+    Action_MinimumSolidsDistance_AsyncWorker(Napi::Promise::Deferred const &d, const MbSolid &solid1,
+                                             const MbMatrix3D &matr1, bool isMultipleUseSolid1, const MbSolid &solid2,
+                                             const MbMatrix3D &matr2, bool isMultipleUseSolid2,
+                                             double lowerLimitDistance, bool tillFirstLowerLimit);
+    virtual ~Action_MinimumSolidsDistance_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class Action_MinimumSolidsDistance_AsyncWorker : public PromiseWorker {
-      public:
-          Action_MinimumSolidsDistance_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbSolid & solid1,
-                                const MbMatrix3D & matr1,
-                                 bool  isMultipleUseSolid1,
-                                const MbSolid & solid2,
-                                const MbMatrix3D & matr2,
-                                 bool  isMultipleUseSolid2,
-                                 double  lowerLimitDistance,
-                                 bool  tillFirstLowerLimit);
-          virtual ~Action_MinimumSolidsDistance_AsyncWorker() {};
+  private:
+    const MbSolid &solid1;
+    const MbMatrix3D &matr1;
+    bool isMultipleUseSolid1;
+    const MbSolid &solid2;
+    const MbMatrix3D &matr2;
+    bool isMultipleUseSolid2;
+    double lowerLimitDistance;
+    bool tillFirstLowerLimit;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    bool hasDistance;
 
-      private:
-                        const MbSolid & solid1;
-                        const MbMatrix3D & matr1;
-                         bool  isMultipleUseSolid1;
-                        const MbSolid & solid2;
-                        const MbMatrix3D & matr2;
-                         bool  isMultipleUseSolid2;
-                         double  lowerLimitDistance;
-                         bool  tillFirstLowerLimit;
+    std::vector<MbShellsDistanceData> *shellsDistanceData;
 
-                
-                 bool  hasDistance;
-                
-                
-                 std::vector<MbShellsDistanceData> * shellsDistanceData;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class Action_FindFilletFaces_AsyncWorker : public PromiseWorker
+{
+  public:
+    Action_FindFilletFaces_AsyncWorker(Napi::Promise::Deferred const &d, const RPArray<MbFace> &faces, double accuracy);
+    virtual ~Action_FindFilletFaces_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class Action_FindFilletFaces_AsyncWorker : public PromiseWorker {
-      public:
-          Action_FindFilletFaces_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const RPArray<MbFace> & faces,
-                                 double  accuracy);
-          virtual ~Action_FindFilletFaces_AsyncWorker() {};
+  private:
+    const RPArray<MbFace> &faces;
+    double accuracy;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    RPArray<MbFace> *filletFaces;
 
-      private:
-                        const RPArray<MbFace> & faces;
-                         double  accuracy;
+    int resultType;
+};
 
-                
-                 RPArray<MbFace> * filletFaces;
-                
+class Action_GetDistanceToCube_AsyncWorker : public PromiseWorker
+{
+  public:
+    Action_GetDistanceToCube_AsyncWorker(Napi::Promise::Deferred const &d, const MbPlacement3D &pl,
+                                         const MbFaceShell *shell, bool findMax = true);
+    virtual ~Action_GetDistanceToCube_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    const MbPlacement3D &pl;
+    const MbFaceShell *shell;
+    bool findMax = true;
 
-  class Action_GetDistanceToCube_AsyncWorker : public PromiseWorker {
-      public:
-          Action_GetDistanceToCube_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbPlacement3D & pl,
-                                const MbFaceShell * shell,
-                                 bool  findMax = true);
-          virtual ~Action_GetDistanceToCube_AsyncWorker() {};
+    bool isFound;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    double dPlus;
 
-      private:
-                        const MbPlacement3D & pl;
-                        const MbFaceShell * shell;
-                         bool  findMax= true;
+    double dMinus;
 
-                
-                 bool  isFound;
-                
-                
-                 double  dPlus;
-                
-                
-                 double  dMinus;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

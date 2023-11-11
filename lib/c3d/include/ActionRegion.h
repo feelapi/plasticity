@@ -14,99 +14,81 @@
 
 #include "PromiseWorker.h"
 
-class ActionRegion : public
-  Napi::ObjectWrap<ActionRegion>
+class ActionRegion : public Napi::ObjectWrap<ActionRegion>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value GetCorrectRegions(const Napi::CallbackInfo& info);
-        static Napi::Value GetCorrectRegions_async(const Napi::CallbackInfo& info);
-        static Napi::Value MakeRegions(const Napi::CallbackInfo& info);
-        static Napi::Value MakeRegions_async(const Napi::CallbackInfo& info);
-        static Napi::Value CreateBooleanResultRegions(const Napi::CallbackInfo& info);
-        static Napi::Value CreateBooleanResultRegions_async(const Napi::CallbackInfo& info);
+    static Napi::Value GetCorrectRegions(const Napi::CallbackInfo &info);
+    static Napi::Value GetCorrectRegions_async(const Napi::CallbackInfo &info);
+    static Napi::Value MakeRegions(const Napi::CallbackInfo &info);
+    static Napi::Value MakeRegions_async(const Napi::CallbackInfo &info);
+    static Napi::Value CreateBooleanResultRegions(const Napi::CallbackInfo &info);
+    static Napi::Value CreateBooleanResultRegions_async(const Napi::CallbackInfo &info);
 };
 
+class ActionRegion_GetCorrectRegions_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionRegion_GetCorrectRegions_AsyncWorker(Napi::Promise::Deferred const &d, const RPArray<MbContour> &contours,
+                                               bool sameContours);
+    virtual ~ActionRegion_GetCorrectRegions_AsyncWorker(){};
 
-  class ActionRegion_GetCorrectRegions_AsyncWorker : public PromiseWorker {
-      public:
-          ActionRegion_GetCorrectRegions_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const RPArray<MbContour> & contours,
-                                 bool  sameContours);
-          virtual ~ActionRegion_GetCorrectRegions_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    const RPArray<MbContour> &contours;
+    bool sameContours;
 
-      private:
-                        const RPArray<MbContour> & contours;
-                         bool  sameContours;
+    RPArray<MbRegion> *regions;
 
-                
-                 RPArray<MbRegion> * regions;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class ActionRegion_MakeRegions_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionRegion_MakeRegions_AsyncWorker(Napi::Promise::Deferred const &d, RPArray<MbContour> &contours,
+                                         bool useSelfIntCntrs, bool sameContours);
+    virtual ~ActionRegion_MakeRegions_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class ActionRegion_MakeRegions_AsyncWorker : public PromiseWorker {
-      public:
-          ActionRegion_MakeRegions_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 RPArray<MbContour> & contours,
-                                 bool  useSelfIntCntrs,
-                                 bool  sameContours);
-          virtual ~ActionRegion_MakeRegions_AsyncWorker() {};
+  private:
+    RPArray<MbContour> &contours;
+    bool useSelfIntCntrs;
+    bool sameContours;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    RPArray<MbRegion> *regions;
 
-      private:
-                         RPArray<MbContour> & contours;
-                         bool  useSelfIntCntrs;
-                         bool  sameContours;
+    int resultType;
+};
 
-                
-                 RPArray<MbRegion> * regions;
-                
+class ActionRegion_CreateBooleanResultRegions_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionRegion_CreateBooleanResultRegions_AsyncWorker(Napi::Promise::Deferred const &d, MbRegion &region1,
+                                                        MbRegion &region2, const MbRegionBooleanParams &operParams);
+    virtual ~ActionRegion_CreateBooleanResultRegions_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    MbRegion &region1;
+    MbRegion &region2;
+    const MbRegionBooleanParams &operParams;
 
-  class ActionRegion_CreateBooleanResultRegions_AsyncWorker : public PromiseWorker {
-      public:
-          ActionRegion_CreateBooleanResultRegions_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbRegion & region1,
-                                 MbRegion & region2,
-                                const MbRegionBooleanParams & operParams);
-          virtual ~ActionRegion_CreateBooleanResultRegions_AsyncWorker() {};
+    RPArray<MbRegion> *regions;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    MbResultType *resInfo;
 
-      private:
-                         MbRegion & region1;
-                         MbRegion & region2;
-                        const MbRegionBooleanParams & operParams;
-
-                
-                 RPArray<MbRegion> * regions;
-                
-                
-                 MbResultType * resInfo;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

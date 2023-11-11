@@ -13,7 +13,8 @@ Napi::Value _SolidDuplicate::GetBuffers(const Napi::CallbackInfo &info)
 
     Napi::Env env = info.Env();
 
-    Napi::ArrayBuffer ofBuf = Napi::ArrayBuffer::New(env, (void *)underlying->originalFaceIds, count * sizeof(uint64_t));
+    Napi::ArrayBuffer ofBuf =
+        Napi::ArrayBuffer::New(env, (void *)underlying->originalFaceIds, count * sizeof(uint64_t));
     Napi::BigInt64Array ofArray = Napi::BigInt64Array::New(env, count, ofBuf, 0);
 
     Napi::ArrayBuffer cfBuf = Napi::ArrayBuffer::New(env, (void *)underlying->copyFaceIds, count * sizeof(uint64_t));

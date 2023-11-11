@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class Function : public
-  Napi::ObjectWrap<Function>
+class Function : public Napi::ObjectWrap<Function>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbFunction *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        Function(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbFunction *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    Function(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbFunction * _underlying;
-
-
+    MbFunction *_underlying;
 
   private:
-
 };
-
-
 
 #endif

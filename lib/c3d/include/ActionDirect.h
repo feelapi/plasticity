@@ -16,136 +16,110 @@
 
 #include "PromiseWorker.h"
 
-class ActionDirect : public
-  Napi::ObjectWrap<ActionDirect>
+class ActionDirect : public Napi::ObjectWrap<ActionDirect>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value CollectFacesForModification(const Napi::CallbackInfo& info);
-        static Napi::Value CollectFacesForModification_async(const Napi::CallbackInfo& info);
-        static Napi::Value FaceModifiedSolid(const Napi::CallbackInfo& info);
-        static Napi::Value FaceModifiedSolid_async(const Napi::CallbackInfo& info);
-        static Napi::Value TransformedSolid(const Napi::CallbackInfo& info);
-        static Napi::Value TransformedSolid_async(const Napi::CallbackInfo& info);
-        static Napi::Value EdgeModifiedSolid(const Napi::CallbackInfo& info);
-        static Napi::Value EdgeModifiedSolid_async(const Napi::CallbackInfo& info);
+    static Napi::Value CollectFacesForModification(const Napi::CallbackInfo &info);
+    static Napi::Value CollectFacesForModification_async(const Napi::CallbackInfo &info);
+    static Napi::Value FaceModifiedSolid(const Napi::CallbackInfo &info);
+    static Napi::Value FaceModifiedSolid_async(const Napi::CallbackInfo &info);
+    static Napi::Value TransformedSolid(const Napi::CallbackInfo &info);
+    static Napi::Value TransformedSolid_async(const Napi::CallbackInfo &info);
+    static Napi::Value EdgeModifiedSolid(const Napi::CallbackInfo &info);
+    static Napi::Value EdgeModifiedSolid_async(const Napi::CallbackInfo &info);
 };
 
+class ActionDirect_CollectFacesForModification_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionDirect_CollectFacesForModification_AsyncWorker(Napi::Promise::Deferred const &d, MbFaceShell *shell,
+                                                         MbeModifyingType way, double radius);
+    virtual ~ActionDirect_CollectFacesForModification_AsyncWorker(){};
 
-  class ActionDirect_CollectFacesForModification_AsyncWorker : public PromiseWorker {
-      public:
-          ActionDirect_CollectFacesForModification_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbFaceShell * shell,
-                                 MbeModifyingType  way,
-                                 double  radius);
-          virtual ~ActionDirect_CollectFacesForModification_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbFaceShell *shell;
+    MbeModifyingType way;
+    double radius;
 
-      private:
-                         MbFaceShell * shell;
-                         MbeModifyingType  way;
-                         double  radius;
+    RPArray<MbFace> *faces;
 
-                
-                 RPArray<MbFace> * faces;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class ActionDirect_FaceModifiedSolid_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionDirect_FaceModifiedSolid_AsyncWorker(Napi::Promise::Deferred const &d, MbSolid &solid, MbeCopyMode sameShell,
+                                               const ModifyValues &params, const RPArray<MbFace> &faces,
+                                               const MbSNameMaker &names);
+    virtual ~ActionDirect_FaceModifiedSolid_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class ActionDirect_FaceModifiedSolid_AsyncWorker : public PromiseWorker {
-      public:
-          ActionDirect_FaceModifiedSolid_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbSolid & solid,
-                                 MbeCopyMode  sameShell,
-                                const ModifyValues & params,
-                                const RPArray<MbFace> & faces,
-                                const MbSNameMaker & names);
-          virtual ~ActionDirect_FaceModifiedSolid_AsyncWorker() {};
+  private:
+    MbSolid &solid;
+    MbeCopyMode sameShell;
+    const ModifyValues &params;
+    const RPArray<MbFace> &faces;
+    const MbSNameMaker &names;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    MbSolid *result;
 
-      private:
-                         MbSolid & solid;
-                         MbeCopyMode  sameShell;
-                        const ModifyValues & params;
-                        const RPArray<MbFace> & faces;
-                        const MbSNameMaker & names;
+    int resultType;
+};
 
-                
-                 MbSolid * result;
-                
+class ActionDirect_TransformedSolid_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionDirect_TransformedSolid_AsyncWorker(Napi::Promise::Deferred const &d, MbSolid &solid, MbeCopyMode sameShell,
+                                              const TransformValues &params, const MbSNameMaker &names);
+    virtual ~ActionDirect_TransformedSolid_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    MbSolid &solid;
+    MbeCopyMode sameShell;
+    const TransformValues &params;
+    const MbSNameMaker &names;
 
-  class ActionDirect_TransformedSolid_AsyncWorker : public PromiseWorker {
-      public:
-          ActionDirect_TransformedSolid_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbSolid & solid,
-                                 MbeCopyMode  sameShell,
-                                const TransformValues & params,
-                                const MbSNameMaker & names);
-          virtual ~ActionDirect_TransformedSolid_AsyncWorker() {};
+    MbSolid *result;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    int resultType;
+};
 
-      private:
-                         MbSolid & solid;
-                         MbeCopyMode  sameShell;
-                        const TransformValues & params;
-                        const MbSNameMaker & names;
+class ActionDirect_EdgeModifiedSolid_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionDirect_EdgeModifiedSolid_AsyncWorker(Napi::Promise::Deferred const &d, MbSolid &solid, MbeCopyMode sameShell,
+                                               const ModifyValues &params, const RPArray<MbCurveEdge> &edges,
+                                               const MbSNameMaker &names);
+    virtual ~ActionDirect_EdgeModifiedSolid_AsyncWorker(){};
 
-                
-                 MbSolid * result;
-                
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-        int resultType;
-  };
+  private:
+    MbSolid &solid;
+    MbeCopyMode sameShell;
+    const ModifyValues &params;
+    const RPArray<MbCurveEdge> &edges;
+    const MbSNameMaker &names;
 
+    MbSolid *result;
 
-  class ActionDirect_EdgeModifiedSolid_AsyncWorker : public PromiseWorker {
-      public:
-          ActionDirect_EdgeModifiedSolid_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbSolid & solid,
-                                 MbeCopyMode  sameShell,
-                                const ModifyValues & params,
-                                const RPArray<MbCurveEdge> & edges,
-                                const MbSNameMaker & names);
-          virtual ~ActionDirect_EdgeModifiedSolid_AsyncWorker() {};
-
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
-
-      private:
-                         MbSolid & solid;
-                         MbeCopyMode  sameShell;
-                        const ModifyValues & params;
-                        const RPArray<MbCurveEdge> & edges;
-                        const MbSNameMaker & names;
-
-                
-                 MbSolid * result;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

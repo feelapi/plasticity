@@ -12,28 +12,23 @@
 #include "CurveEdge.h"
 #include "PromiseWorker.h"
 
-class EdgeSequence : public
-  Napi::ObjectWrap<EdgeSequence>
+class EdgeSequence : public Napi::ObjectWrap<EdgeSequence>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbEdgeSequence *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        EdgeSequence(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbEdgeSequence *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    EdgeSequence(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbEdgeSequence * _underlying;
+    MbEdgeSequence *_underlying;
 
     ~EdgeSequence();
 
-
   private:
-        Napi::Value GetValue_closed(const Napi::CallbackInfo &info);
-        void SetValue_closed(const Napi::CallbackInfo &info, const Napi::Value &value);
-
+    Napi::Value GetValue_closed(const Napi::CallbackInfo &info);
+    void SetValue_closed(const Napi::CallbackInfo &info, const Napi::Value &value);
 };
-
-
 
 #endif

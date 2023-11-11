@@ -51,7 +51,8 @@ Napi::Value cast(MbSpaceItem *_underlying, const Napi::CallbackInfo &info)
     if (_underlying->IsA() != isa && _underlying->Family() != isa && _underlying->Type() != isa)
     {
         std::ostringstream msg;
-        msg << "Operation Cast failed: object is a " << _underlying->IsA() << " with family " << _underlying->Family() << " but trying to cast to " << isa << "\n";
+        msg << "Operation Cast failed: object is a " << _underlying->IsA() << " with family " << _underlying->Family()
+            << " but trying to cast to " << isa << "\n";
         Napi::Error::New(env, msg.str()).ThrowAsJavaScriptException();
         return env.Undefined();
     }

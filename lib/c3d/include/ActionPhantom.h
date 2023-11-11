@@ -17,75 +17,61 @@
 
 #include "PromiseWorker.h"
 
-class ActionPhantom : public
-  Napi::ObjectWrap<ActionPhantom>
+class ActionPhantom : public Napi::ObjectWrap<ActionPhantom>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value SmoothPhantom(const Napi::CallbackInfo& info);
-        static Napi::Value SmoothPhantom_async(const Napi::CallbackInfo& info);
-        static Napi::Value SmoothSequence(const Napi::CallbackInfo& info);
-        static Napi::Value SmoothSequence_async(const Napi::CallbackInfo& info);
+    static Napi::Value SmoothPhantom(const Napi::CallbackInfo &info);
+    static Napi::Value SmoothPhantom_async(const Napi::CallbackInfo &info);
+    static Napi::Value SmoothSequence(const Napi::CallbackInfo &info);
+    static Napi::Value SmoothSequence_async(const Napi::CallbackInfo &info);
 };
 
+class ActionPhantom_SmoothPhantom_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionPhantom_SmoothPhantom_AsyncWorker(Napi::Promise::Deferred const &d, MbSolid &solid,
+                                            SArray<MbEdgeFunction> &edges, const SmoothValues &params);
+    virtual ~ActionPhantom_SmoothPhantom_AsyncWorker(){};
 
-  class ActionPhantom_SmoothPhantom_AsyncWorker : public PromiseWorker {
-      public:
-          ActionPhantom_SmoothPhantom_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbSolid & solid,
-                                 SArray<MbEdgeFunction> & edges,
-                                const SmoothValues & params);
-          virtual ~ActionPhantom_SmoothPhantom_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbSolid &solid;
+    SArray<MbEdgeFunction> &edges;
+    const SmoothValues &params;
 
-      private:
-                         MbSolid & solid;
-                         SArray<MbEdgeFunction> & edges;
-                        const SmoothValues & params;
+    RPArray<MbSurface> *result;
 
-                
-                 RPArray<MbSurface> * result;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class ActionPhantom_SmoothSequence_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionPhantom_SmoothSequence_AsyncWorker(Napi::Promise::Deferred const &d, const MbSolid &solid,
+                                             RPArray<MbCurveEdge> &edges, const SmoothValues &params,
+                                             bool createSurfaces);
+    virtual ~ActionPhantom_SmoothSequence_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class ActionPhantom_SmoothSequence_AsyncWorker : public PromiseWorker {
-      public:
-          ActionPhantom_SmoothSequence_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbSolid & solid,
-                                 RPArray<MbCurveEdge> & edges,
-                                const SmoothValues & params,
-                                 bool  createSurfaces);
-          virtual ~ActionPhantom_SmoothSequence_AsyncWorker() {};
+  private:
+    const MbSolid &solid;
+    RPArray<MbCurveEdge> &edges;
+    const SmoothValues &params;
+    bool createSurfaces;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    RPArray<MbEdgeSequence> *sequences;
 
-      private:
-                        const MbSolid & solid;
-                         RPArray<MbCurveEdge> & edges;
-                        const SmoothValues & params;
-                         bool  createSurfaces;
+    RPArray<MbSurface> *result;
 
-                
-                 RPArray<MbEdgeSequence> * sequences;
-                
-                
-                 RPArray<MbSurface> * result;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

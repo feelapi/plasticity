@@ -14,71 +14,58 @@
 
 #include "PromiseWorker.h"
 
-class CurveTangent : public
-  Napi::ObjectWrap<CurveTangent>
+class CurveTangent : public Napi::ObjectWrap<CurveTangent>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value LinePointTangentCurve(const Napi::CallbackInfo& info);
-        static Napi::Value LinePointTangentCurve_async(const Napi::CallbackInfo& info);
-        static Napi::Value LineTangentTwoCurves(const Napi::CallbackInfo& info);
-        static Napi::Value LineTangentTwoCurves_async(const Napi::CallbackInfo& info);
+    static Napi::Value LinePointTangentCurve(const Napi::CallbackInfo &info);
+    static Napi::Value LinePointTangentCurve_async(const Napi::CallbackInfo &info);
+    static Napi::Value LineTangentTwoCurves(const Napi::CallbackInfo &info);
+    static Napi::Value LineTangentTwoCurves_async(const Napi::CallbackInfo &info);
 };
 
+class CurveTangent_LinePointTangentCurve_AsyncWorker : public PromiseWorker
+{
+  public:
+    CurveTangent_LinePointTangentCurve_AsyncWorker(Napi::Promise::Deferred const &d, const MbCartPoint &pnt,
+                                                   const MbCurve &pCurve, bool lineAsCurve = false);
+    virtual ~CurveTangent_LinePointTangentCurve_AsyncWorker(){};
 
-  class CurveTangent_LinePointTangentCurve_AsyncWorker : public PromiseWorker {
-      public:
-          CurveTangent_LinePointTangentCurve_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbCartPoint & pnt,
-                                const MbCurve & pCurve,
-                                 bool  lineAsCurve = false);
-          virtual ~CurveTangent_LinePointTangentCurve_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    const MbCartPoint &pnt;
+    const MbCurve &pCurve;
+    bool lineAsCurve = false;
 
-      private:
-                        const MbCartPoint & pnt;
-                        const MbCurve & pCurve;
-                         bool  lineAsCurve= false;
+    PArray<MbLine> *pLine;
 
-                
-                 PArray<MbLine> * pLine;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class CurveTangent_LineTangentTwoCurves_AsyncWorker : public PromiseWorker
+{
+  public:
+    CurveTangent_LineTangentTwoCurves_AsyncWorker(Napi::Promise::Deferred const &d, const MbCurve *pCurve1,
+                                                  const MbCurve *pCurve2);
+    virtual ~CurveTangent_LineTangentTwoCurves_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class CurveTangent_LineTangentTwoCurves_AsyncWorker : public PromiseWorker {
-      public:
-          CurveTangent_LineTangentTwoCurves_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbCurve * pCurve1,
-                                const MbCurve * pCurve2);
-          virtual ~CurveTangent_LineTangentTwoCurves_AsyncWorker() {};
+  private:
+    const MbCurve *pCurve1;
+    const MbCurve *pCurve2;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    PArray<MbLine> *pLine;
 
-      private:
-                        const MbCurve * pCurve1;
-                        const MbCurve * pCurve2;
+    SArray<MbCartPoint> *secondPoint;
 
-                
-                 PArray<MbLine> * pLine;
-                
-                
-                 SArray<MbCartPoint> * secondPoint;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

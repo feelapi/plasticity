@@ -12,25 +12,19 @@
 #include "Axis3D.h"
 #include "PromiseWorker.h"
 
-class FloatAxis3D : public
-  Napi::ObjectWrap<FloatAxis3D>
+class FloatAxis3D : public Napi::ObjectWrap<FloatAxis3D>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbFloatAxis3D *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        FloatAxis3D(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbFloatAxis3D *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    FloatAxis3D(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbFloatAxis3D * _underlying;
-
-
+    MbFloatAxis3D *_underlying;
 
   private:
-
 };
-
-
 
 #endif

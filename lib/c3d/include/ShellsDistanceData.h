@@ -11,46 +11,38 @@
 
 #include "PromiseWorker.h"
 
-class ShellsDistanceData : public
-  Napi::ObjectWrap<ShellsDistanceData>
+class ShellsDistanceData : public Napi::ObjectWrap<ShellsDistanceData>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbShellsDistanceData raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        ShellsDistanceData(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbShellsDistanceData raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    ShellsDistanceData(const Napi::CallbackInfo &info);
 
-         Napi::Value GetMinDistanse(const Napi::CallbackInfo& info);
-         Napi::Value GetMinDistanse_async(const Napi::CallbackInfo& info);
+    Napi::Value GetMinDistanse(const Napi::CallbackInfo &info);
+    Napi::Value GetMinDistanse_async(const Napi::CallbackInfo &info);
 
-    MbShellsDistanceData  _underlying;
-
-
+    MbShellsDistanceData _underlying;
 
   private:
-
 };
 
+class ShellsDistanceData_GetMinDistanse_AsyncWorker : public PromiseWorker
+{
+  public:
+    ShellsDistanceData_GetMinDistanse_AsyncWorker(MbShellsDistanceData _underlying, Napi::Promise::Deferred const &d);
+    virtual ~ShellsDistanceData_GetMinDistanse_AsyncWorker(){};
 
-  class ShellsDistanceData_GetMinDistanse_AsyncWorker : public PromiseWorker {
-      public:
-          ShellsDistanceData_GetMinDistanse_AsyncWorker(
-MbShellsDistanceData  _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~ShellsDistanceData_GetMinDistanse_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbShellsDistanceData _underlying;
 
-      private:
-MbShellsDistanceData  _underlying;
-                
-                 double  _result;
-                
+    double _result;
 
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

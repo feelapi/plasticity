@@ -17,84 +17,66 @@
 
 #include "PromiseWorker.h"
 
-class ActionShell : public
-  Napi::ObjectWrap<ActionShell>
+class ActionShell : public Napi::ObjectWrap<ActionShell>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value ExtensionShell(const Napi::CallbackInfo& info);
-        static Napi::Value ExtensionShell_async(const Napi::CallbackInfo& info);
-        static Napi::Value OffsetShell(const Napi::CallbackInfo& info);
-        static Napi::Value OffsetShell_async(const Napi::CallbackInfo& info);
+    static Napi::Value ExtensionShell(const Napi::CallbackInfo &info);
+    static Napi::Value ExtensionShell_async(const Napi::CallbackInfo &info);
+    static Napi::Value OffsetShell(const Napi::CallbackInfo &info);
+    static Napi::Value OffsetShell_async(const Napi::CallbackInfo &info);
 };
 
+class ActionShell_ExtensionShell_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionShell_ExtensionShell_AsyncWorker(Napi::Promise::Deferred const &d, MbSolid &solid, MbeCopyMode sameShell,
+                                           MbFace &face, const RPArray<MbCurveEdge> &edges,
+                                           const ExtensionValues &params, const MbSNameMaker &operNames);
+    virtual ~ActionShell_ExtensionShell_AsyncWorker(){};
 
-  class ActionShell_ExtensionShell_AsyncWorker : public PromiseWorker {
-      public:
-          ActionShell_ExtensionShell_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbSolid & solid,
-                                 MbeCopyMode  sameShell,
-                                 MbFace & face,
-                                const RPArray<MbCurveEdge> & edges,
-                                const ExtensionValues & params,
-                                const MbSNameMaker & operNames);
-          virtual ~ActionShell_ExtensionShell_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbSolid &solid;
+    MbeCopyMode sameShell;
+    MbFace &face;
+    const RPArray<MbCurveEdge> &edges;
+    const ExtensionValues &params;
+    const MbSNameMaker &operNames;
 
-      private:
-                         MbSolid & solid;
-                         MbeCopyMode  sameShell;
-                         MbFace & face;
-                        const RPArray<MbCurveEdge> & edges;
-                        const ExtensionValues & params;
-                        const MbSNameMaker & operNames;
+    MbSolid *result;
 
-                
-                 MbSolid * result;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class ActionShell_OffsetShell_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionShell_OffsetShell_AsyncWorker(Napi::Promise::Deferred const &d, MbSolid &solid, MbeCopyMode sameShell,
+                                        RPArray<MbFace> &initFaces, bool checkFacesConnection, SweptValues &p,
+                                        const MbSNameMaker &operNames, bool copyFaceAttrs);
+    virtual ~ActionShell_OffsetShell_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class ActionShell_OffsetShell_AsyncWorker : public PromiseWorker {
-      public:
-          ActionShell_OffsetShell_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbSolid & solid,
-                                 MbeCopyMode  sameShell,
-                                 RPArray<MbFace> & initFaces,
-                                 bool  checkFacesConnection,
-                                 SweptValues & p,
-                                const MbSNameMaker & operNames,
-                                 bool  copyFaceAttrs);
-          virtual ~ActionShell_OffsetShell_AsyncWorker() {};
+  private:
+    MbSolid &solid;
+    MbeCopyMode sameShell;
+    RPArray<MbFace> &initFaces;
+    bool checkFacesConnection;
+    SweptValues &p;
+    const MbSNameMaker &operNames;
+    bool copyFaceAttrs;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    MbSolid *result;
 
-      private:
-                         MbSolid & solid;
-                         MbeCopyMode  sameShell;
-                         RPArray<MbFace> & initFaces;
-                         bool  checkFacesConnection;
-                         SweptValues & p;
-                        const MbSNameMaker & operNames;
-                         bool  copyFaceAttrs;
-
-                
-                 MbSolid * result;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

@@ -15,79 +15,64 @@
 
 #include "PromiseWorker.h"
 
-class ContourGraph : public
-  Napi::ObjectWrap<ContourGraph>
+class ContourGraph : public Napi::ObjectWrap<ContourGraph>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value OuterContoursBuilder(const Napi::CallbackInfo& info);
-        static Napi::Value OuterContoursBuilder_async(const Napi::CallbackInfo& info);
-        static Napi::Value RemoveContourGaps(const Napi::CallbackInfo& info);
-        static Napi::Value RemoveContourGaps_async(const Napi::CallbackInfo& info);
+    static Napi::Value OuterContoursBuilder(const Napi::CallbackInfo &info);
+    static Napi::Value OuterContoursBuilder_async(const Napi::CallbackInfo &info);
+    static Napi::Value RemoveContourGaps(const Napi::CallbackInfo &info);
+    static Napi::Value RemoveContourGaps_async(const Napi::CallbackInfo &info);
 };
 
+class ContourGraph_OuterContoursBuilder_AsyncWorker : public PromiseWorker
+{
+  public:
+    ContourGraph_OuterContoursBuilder_AsyncWorker(Napi::Promise::Deferred const &d, const RPArray<MbCurve> &curveList,
+                                                  double accuracy = METRIC_ACCURACY, bool strict = false,
+                                                  VERSION version = Math::DefaultMathVersion(),
+                                                  ProgressIndicator *progInd = NULL);
+    virtual ~ContourGraph_OuterContoursBuilder_AsyncWorker(){};
 
-  class ContourGraph_OuterContoursBuilder_AsyncWorker : public PromiseWorker {
-      public:
-          ContourGraph_OuterContoursBuilder_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const RPArray<MbCurve> & curveList,
-                                 double  accuracy = METRIC_ACCURACY,
-                                 bool  strict = false,
-                                 VERSION  version = Math::DefaultMathVersion(),
-                                 ProgressIndicator * progInd = NULL);
-          virtual ~ContourGraph_OuterContoursBuilder_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    const RPArray<MbCurve> &curveList;
+    double accuracy = METRIC_ACCURACY;
+    bool strict = false;
+    VERSION version = Math::DefaultMathVersion();
+    ProgressIndicator *progInd = NULL;
 
-      private:
-                        const RPArray<MbCurve> & curveList;
-                         double  accuracy= METRIC_ACCURACY;
-                         bool  strict= false;
-                         VERSION  version= Math::DefaultMathVersion();
-                         ProgressIndicator * progInd= NULL;
+    MpGraph *graph;
 
-                
-                 MpGraph * graph;
-                
-                
-                 PArray<MbContour> * contours;
-                
+    PArray<MbContour> *contours;
 
-        int resultType;
-  };
+    int resultType;
+};
 
+class ContourGraph_RemoveContourGaps_AsyncWorker : public PromiseWorker
+{
+  public:
+    ContourGraph_RemoveContourGaps_AsyncWorker(Napi::Promise::Deferred const &d, MbContour &contour, double accuracy,
+                                               bool canInsert, bool canReplace);
+    virtual ~ContourGraph_RemoveContourGaps_AsyncWorker(){};
 
-  class ContourGraph_RemoveContourGaps_AsyncWorker : public PromiseWorker {
-      public:
-          ContourGraph_RemoveContourGaps_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                 MbContour & contour,
-                                 double  accuracy,
-                                 bool  canInsert,
-                                 bool  canReplace);
-          virtual ~ContourGraph_RemoveContourGaps_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbContour &contour;
+    double accuracy;
+    bool canInsert;
+    bool canReplace;
 
-      private:
-                         MbContour & contour;
-                         double  accuracy;
-                         bool  canInsert;
-                         bool  canReplace;
+    bool _result;
 
-                
-                 bool  _result;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

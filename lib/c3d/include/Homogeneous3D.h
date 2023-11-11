@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class Homogeneous3D : public
-  Napi::ObjectWrap<Homogeneous3D>
+class Homogeneous3D : public Napi::ObjectWrap<Homogeneous3D>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbHomogeneous3D *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        Homogeneous3D(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbHomogeneous3D *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    Homogeneous3D(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbHomogeneous3D * _underlying;
-
-
+    MbHomogeneous3D *_underlying;
 
   private:
-
 };
-
-
 
 #endif

@@ -15,11 +15,14 @@ Napi::Value Grid::GetBuffers(const Napi::CallbackInfo &info)
 
     Napi::Env env = info.Env();
     Napi::Object result = Napi::Object::New(env);
-    Napi::ArrayBuffer tbuf = Napi::ArrayBuffer::New(env, (void *)underlying->GetTrianglesAddr(), sizeof(MbTriangle) * underlying->TrianglesCount());
+    Napi::ArrayBuffer tbuf = Napi::ArrayBuffer::New(env, (void *)underlying->GetTrianglesAddr(),
+                                                    sizeof(MbTriangle) * underlying->TrianglesCount());
     Napi::Uint32Array index = Napi::Uint32Array::New(env, 3 * underlying->TrianglesCount(), tbuf, 0);
-    Napi::ArrayBuffer pbuf = Napi::ArrayBuffer::New(env, (void *)underlying->GetFloatPointsAddr(), sizeof(MbFloatPoint3D) * underlying->PointsCount());
+    Napi::ArrayBuffer pbuf = Napi::ArrayBuffer::New(env, (void *)underlying->GetFloatPointsAddr(),
+                                                    sizeof(MbFloatPoint3D) * underlying->PointsCount());
     Napi::Float32Array position = Napi::Float32Array::New(env, 3 * underlying->PointsCount(), pbuf, 0);
-    Napi::ArrayBuffer nbuf = Napi::ArrayBuffer::New(env, (void *)underlying->GetFloatNormalsAddr(), sizeof(MbFloatPoint3D) * underlying->PointsCount());
+    Napi::ArrayBuffer nbuf = Napi::ArrayBuffer::New(env, (void *)underlying->GetFloatNormalsAddr(),
+                                                    sizeof(MbFloatPoint3D) * underlying->PointsCount());
     Napi::Float32Array normal = Napi::Float32Array::New(env, 3 * underlying->NormalsCount(), nbuf, 0);
 
     result.Set(Napi::String::New(env, "index"), index);
@@ -33,11 +36,14 @@ Napi::Object getBuffer(const Napi::CallbackInfo &info, const size_t i, MbGrid *g
 {
     Napi::Env env = info.Env();
     Napi::Object result = Napi::Object::New(env);
-    Napi::ArrayBuffer tbuf = Napi::ArrayBuffer::New(env, (void *)grid->GetTrianglesAddr(), sizeof(MbTriangle) * grid->TrianglesCount());
+    Napi::ArrayBuffer tbuf =
+        Napi::ArrayBuffer::New(env, (void *)grid->GetTrianglesAddr(), sizeof(MbTriangle) * grid->TrianglesCount());
     Napi::Uint32Array index = Napi::Uint32Array::New(env, 3 * grid->TrianglesCount(), tbuf, 0);
-    Napi::ArrayBuffer pbuf = Napi::ArrayBuffer::New(env, (void *)grid->GetFloatPointsAddr(), sizeof(MbFloatPoint3D) * grid->PointsCount());
+    Napi::ArrayBuffer pbuf =
+        Napi::ArrayBuffer::New(env, (void *)grid->GetFloatPointsAddr(), sizeof(MbFloatPoint3D) * grid->PointsCount());
     Napi::Float32Array position = Napi::Float32Array::New(env, 3 * grid->PointsCount(), pbuf, 0);
-    Napi::ArrayBuffer nbuf = Napi::ArrayBuffer::New(env, (void *)grid->GetFloatNormalsAddr(), sizeof(MbFloatPoint3D) * grid->PointsCount());
+    Napi::ArrayBuffer nbuf =
+        Napi::ArrayBuffer::New(env, (void *)grid->GetFloatNormalsAddr(), sizeof(MbFloatPoint3D) * grid->PointsCount());
     Napi::Float32Array normal = Napi::Float32Array::New(env, 3 * grid->NormalsCount(), nbuf, 0);
 
     // TODO: test if Napi::String::New is expensive
