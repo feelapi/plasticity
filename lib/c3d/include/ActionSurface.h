@@ -15,72 +15,59 @@
 
 #include "PromiseWorker.h"
 
-class ActionSurface : public
-  Napi::ObjectWrap<ActionSurface>
+class ActionSurface : public Napi::ObjectWrap<ActionSurface>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value ElementarySurface(const Napi::CallbackInfo& info);
-        static Napi::Value ElementarySurface_async(const Napi::CallbackInfo& info);
-        static Napi::Value ExtrusionSurface(const Napi::CallbackInfo& info);
-        static Napi::Value ExtrusionSurface_async(const Napi::CallbackInfo& info);
+    static Napi::Value ElementarySurface(const Napi::CallbackInfo &info);
+    static Napi::Value ElementarySurface_async(const Napi::CallbackInfo &info);
+    static Napi::Value ExtrusionSurface(const Napi::CallbackInfo &info);
+    static Napi::Value ExtrusionSurface_async(const Napi::CallbackInfo &info);
 };
 
+class ActionSurface_ElementarySurface_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionSurface_ElementarySurface_AsyncWorker(Napi::Promise::Deferred const &d, const MbCartPoint3D &point0,
+                                                const MbCartPoint3D &point1, const MbCartPoint3D &point2,
+                                                MbeSpaceType surfaceType);
+    virtual ~ActionSurface_ElementarySurface_AsyncWorker(){};
 
-  class ActionSurface_ElementarySurface_AsyncWorker : public PromiseWorker {
-      public:
-          ActionSurface_ElementarySurface_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbCartPoint3D & point0,
-                                const MbCartPoint3D & point1,
-                                const MbCartPoint3D & point2,
-                                 MbeSpaceType  surfaceType);
-          virtual ~ActionSurface_ElementarySurface_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    const MbCartPoint3D &point0;
+    const MbCartPoint3D &point1;
+    const MbCartPoint3D &point2;
+    MbeSpaceType surfaceType;
 
-      private:
-                        const MbCartPoint3D & point0;
-                        const MbCartPoint3D & point1;
-                        const MbCartPoint3D & point2;
-                         MbeSpaceType  surfaceType;
+    MbSurface *result;
 
-                
-                 MbSurface * result;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class ActionSurface_ExtrusionSurface_AsyncWorker : public PromiseWorker
+{
+  public:
+    ActionSurface_ExtrusionSurface_AsyncWorker(Napi::Promise::Deferred const &d, const MbCurve3D &curve,
+                                               const MbVector3D &direction, bool simplify);
+    virtual ~ActionSurface_ExtrusionSurface_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class ActionSurface_ExtrusionSurface_AsyncWorker : public PromiseWorker {
-      public:
-          ActionSurface_ExtrusionSurface_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbCurve3D & curve,
-                                const MbVector3D & direction,
-                                 bool  simplify);
-          virtual ~ActionSurface_ExtrusionSurface_AsyncWorker() {};
+  private:
+    const MbCurve3D &curve;
+    const MbVector3D &direction;
+    bool simplify;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    MbSurface *result;
 
-      private:
-                        const MbCurve3D & curve;
-                        const MbVector3D & direction;
-                         bool  simplify;
-
-                
-                 MbSurface * result;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

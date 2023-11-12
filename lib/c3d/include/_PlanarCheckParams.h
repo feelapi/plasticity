@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class _PlanarCheckParams : public
-  Napi::ObjectWrap<_PlanarCheckParams>
+class _PlanarCheckParams : public Napi::ObjectWrap<_PlanarCheckParams>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, PlanarCheckParams *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        _PlanarCheckParams(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, PlanarCheckParams *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    _PlanarCheckParams(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    PlanarCheckParams * _underlying;
-
-
+    PlanarCheckParams *_underlying;
 
   private:
-
 };
-
-
 
 #endif

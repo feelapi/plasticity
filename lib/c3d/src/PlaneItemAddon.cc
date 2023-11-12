@@ -36,7 +36,8 @@ Napi::Value cast(MbPlaneItem *_underlying, const Napi::CallbackInfo &info)
     if (_underlying->IsA() != isa && _underlying->Family() != isa)
     {
         std::ostringstream msg;
-        msg << "Operation Cast failed: object is a " << _underlying->IsA() << "with family " << _underlying->Family() << " but trying to cast to " << isa << "\n";
+        msg << "Operation Cast failed: object is a " << _underlying->IsA() << "with family " << _underlying->Family()
+            << " but trying to cast to " << isa << "\n";
         Napi::Error::New(env, msg.str()).ThrowAsJavaScriptException();
         return env.Undefined();
     }
@@ -49,9 +50,9 @@ Napi::Value cast(MbPlaneItem *_underlying, const Napi::CallbackInfo &info)
         return LineSegment::NewInstance(env, (MbLineSegment *)(_underlying));
     case pt_Arc:
         return Arc::NewInstance(env, (MbArc *)(_underlying));
-     case pt_PolyCurve:
+    case pt_PolyCurve:
         return PolyCurve::NewInstance(env, (MbPolyCurve *)(_underlying));
-     case pt_Polyline:
+    case pt_Polyline:
         return Polyline::NewInstance(env, (MbPolyline *)(_underlying));
     case pt_Bezier:
         return Bezier::NewInstance(env, (MbBezier *)(_underlying));
@@ -63,19 +64,20 @@ Napi::Value cast(MbPlaneItem *_underlying, const Napi::CallbackInfo &info)
         return CubicSpline::NewInstance(env, (MbCubicSpline *)(_underlying));
     case pt_TrimmedCurve:
         return TrimmedCurve::NewInstance(env, (MbTrimmedCurve *)(_underlying));
-     case pt_OffsetCurve:
+    case pt_OffsetCurve:
         return OffsetCurve::NewInstance(env, (MbOffsetCurve *)(_underlying));
-     case pt_ReparamCurve:
+    case pt_ReparamCurve:
         return ReparamCurve::NewInstance(env, (MbReparamCurve *)(_underlying));
     case pt_Region:
         return Region::NewInstance(env, (MbRegion *)(_underlying));
     case pt_Curve:
         return Curve::NewInstance(env, (MbCurve *)(_underlying));
-     case pt_Contour:
+    case pt_Contour:
         return Contour::NewInstance(env, (MbContour *)(_underlying));
-   default:
+    default:
         std::ostringstream msg;
-        msg << "Operation Cast failed: object is a " << _underlying->IsA() << " but trying to cast to " << isa << " -- perhaps change PlaneItemAddon.cc \n";
+        msg << "Operation Cast failed: object is a " << _underlying->IsA() << " but trying to cast to " << isa
+            << " -- perhaps change PlaneItemAddon.cc \n";
         Napi::Error::New(env, msg.str()).ThrowAsJavaScriptException();
         return env.Undefined();
     }

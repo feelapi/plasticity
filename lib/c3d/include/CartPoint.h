@@ -11,29 +11,23 @@
 
 #include "PromiseWorker.h"
 
-class CartPoint : public
-  Napi::ObjectWrap<CartPoint>
+class CartPoint : public Napi::ObjectWrap<CartPoint>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbCartPoint *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        CartPoint(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbCartPoint *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    CartPoint(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbCartPoint * _underlying;
-
-
+    MbCartPoint *_underlying;
 
   private:
-        Napi::Value GetValue_x(const Napi::CallbackInfo &info);
-        void SetValue_x(const Napi::CallbackInfo &info, const Napi::Value &value);
-        Napi::Value GetValue_y(const Napi::CallbackInfo &info);
-        void SetValue_y(const Napi::CallbackInfo &info, const Napi::Value &value);
-
+    Napi::Value GetValue_x(const Napi::CallbackInfo &info);
+    void SetValue_x(const Napi::CallbackInfo &info, const Napi::Value &value);
+    Napi::Value GetValue_y(const Napi::CallbackInfo &info);
+    void SetValue_y(const Napi::CallbackInfo &info, const Napi::Value &value);
 };
-
-
 
 #endif

@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class _C3dModelDocument : public
-  Napi::ObjectWrap<_C3dModelDocument>
+class _C3dModelDocument : public Napi::ObjectWrap<_C3dModelDocument>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, C3dModelDocument *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        _C3dModelDocument(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, C3dModelDocument *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    _C3dModelDocument(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    C3dModelDocument * _underlying;
-
-
+    C3dModelDocument *_underlying;
 
   private:
-
 };
-
-
 
 #endif

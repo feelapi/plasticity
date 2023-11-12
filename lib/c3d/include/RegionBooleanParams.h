@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class RegionBooleanParams : public
-  Napi::ObjectWrap<RegionBooleanParams>
+class RegionBooleanParams : public Napi::ObjectWrap<RegionBooleanParams>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbRegionBooleanParams *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        RegionBooleanParams(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbRegionBooleanParams *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    RegionBooleanParams(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbRegionBooleanParams * _underlying;
-
-
+    MbRegionBooleanParams *_underlying;
 
   private:
-
 };
-
-
 
 #endif

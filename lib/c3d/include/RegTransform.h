@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class RegTransform : public
-  Napi::ObjectWrap<RegTransform>
+class RegTransform : public Napi::ObjectWrap<RegTransform>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbRegTransform *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        RegTransform(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbRegTransform *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    RegTransform(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbRegTransform * _underlying;
-
-
+    MbRegTransform *_underlying;
 
   private:
-
 };
-
-
 
 #endif

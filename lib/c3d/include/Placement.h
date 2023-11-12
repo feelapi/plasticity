@@ -13,25 +13,19 @@
 #include "Vector.h"
 #include "PromiseWorker.h"
 
-class Placement : public
-  Napi::ObjectWrap<Placement>
+class Placement : public Napi::ObjectWrap<Placement>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbPlacement *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        Placement(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbPlacement *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    Placement(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbPlacement * _underlying;
-
-
+    MbPlacement *_underlying;
 
   private:
-
 };
-
-
 
 #endif

@@ -6,7 +6,7 @@
 
 #include <model.h>
 
-size_t WriteItems(const MbModel & model, const char *&memory);
-void ReadItems(const void * memory, MbModel *& result);
+size_t WriteItems(const MbModel &model, const char *&memory);
+void ReadItems(const void *memory, MbModel *&result);
 
 #endif

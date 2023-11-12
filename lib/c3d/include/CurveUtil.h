@@ -12,42 +12,33 @@
 
 #include "PromiseWorker.h"
 
-class CurveUtil : public
-  Napi::ObjectWrap<CurveUtil>
+class CurveUtil : public Napi::ObjectWrap<CurveUtil>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value AreaSign(const Napi::CallbackInfo& info);
-        static Napi::Value AreaSign_async(const Napi::CallbackInfo& info);
+    static Napi::Value AreaSign(const Napi::CallbackInfo &info);
+    static Napi::Value AreaSign_async(const Napi::CallbackInfo &info);
 };
 
+class CurveUtil_AreaSign_AsyncWorker : public PromiseWorker
+{
+  public:
+    CurveUtil_AreaSign_AsyncWorker(Napi::Promise::Deferred const &d, const MbCurve &curve, double sag, bool close);
+    virtual ~CurveUtil_AreaSign_AsyncWorker(){};
 
-  class CurveUtil_AreaSign_AsyncWorker : public PromiseWorker {
-      public:
-          CurveUtil_AreaSign_AsyncWorker(
-            Napi::Promise::Deferred const &d,
-                                const MbCurve & curve,
-                                 double  sag,
-                                 bool  close);
-          virtual ~CurveUtil_AreaSign_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    const MbCurve &curve;
+    double sag;
+    bool close;
 
-      private:
-                        const MbCurve & curve;
-                         double  sag;
-                         bool  close;
+    double _result;
 
-                
-                 double  _result;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

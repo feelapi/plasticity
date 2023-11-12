@@ -1,0 +1,3 @@
+# The style used for all options not specifically set in the configuration.
+BasedOnStyle: Microsoft
+SortIncludes: Never

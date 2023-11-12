@@ -12,160 +12,141 @@
 #include "CartPoint3D.h"
 #include "PromiseWorker.h"
 
-class ControlData3D : public
-  Napi::ObjectWrap<ControlData3D>
+class ControlData3D : public Napi::ObjectWrap<ControlData3D>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbControlData3D *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        ControlData3D(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbControlData3D *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    ControlData3D(const Napi::CallbackInfo &info);
 
-         Napi::Value Count(const Napi::CallbackInfo& info);
-         Napi::Value Count_async(const Napi::CallbackInfo& info);
-         Napi::Value GetPoint(const Napi::CallbackInfo& info);
-         Napi::Value GetPoint_async(const Napi::CallbackInfo& info);
-         Napi::Value SetPoint(const Napi::CallbackInfo& info);
-         Napi::Value SetPoint_async(const Napi::CallbackInfo& info);
-         Napi::Value TotalCount(const Napi::CallbackInfo& info);
-         Napi::Value TotalCount_async(const Napi::CallbackInfo& info);
-         Napi::Value ShareCount(const Napi::CallbackInfo& info);
-         Napi::Value ShareCount_async(const Napi::CallbackInfo& info);
-         Napi::Value ResetIndex(const Napi::CallbackInfo& info);
-         Napi::Value ResetIndex_async(const Napi::CallbackInfo& info);
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Count(const Napi::CallbackInfo &info);
+    Napi::Value Count_async(const Napi::CallbackInfo &info);
+    Napi::Value GetPoint(const Napi::CallbackInfo &info);
+    Napi::Value GetPoint_async(const Napi::CallbackInfo &info);
+    Napi::Value SetPoint(const Napi::CallbackInfo &info);
+    Napi::Value SetPoint_async(const Napi::CallbackInfo &info);
+    Napi::Value TotalCount(const Napi::CallbackInfo &info);
+    Napi::Value TotalCount_async(const Napi::CallbackInfo &info);
+    Napi::Value ShareCount(const Napi::CallbackInfo &info);
+    Napi::Value ShareCount_async(const Napi::CallbackInfo &info);
+    Napi::Value ResetIndex(const Napi::CallbackInfo &info);
+    Napi::Value ResetIndex_async(const Napi::CallbackInfo &info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbControlData3D * _underlying;
-
-
+    MbControlData3D *_underlying;
 
   private:
-
 };
 
+class ControlData3D_Count_AsyncWorker : public PromiseWorker
+{
+  public:
+    ControlData3D_Count_AsyncWorker(MbControlData3D *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~ControlData3D_Count_AsyncWorker(){};
 
-  class ControlData3D_Count_AsyncWorker : public PromiseWorker {
-      public:
-          ControlData3D_Count_AsyncWorker(
-MbControlData3D * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~ControlData3D_Count_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbControlData3D *_underlying;
 
-      private:
-MbControlData3D * _underlying;
-                
-                 size_t  _result;
-                
+    size_t _result;
 
-        int resultType;
-  };
+    int resultType;
+};
 
+class ControlData3D_GetPoint_AsyncWorker : public PromiseWorker
+{
+  public:
+    ControlData3D_GetPoint_AsyncWorker(MbControlData3D *_underlying, Napi::Promise::Deferred const &d, size_t i);
+    virtual ~ControlData3D_GetPoint_AsyncWorker(){};
 
-  class ControlData3D_GetPoint_AsyncWorker : public PromiseWorker {
-      public:
-          ControlData3D_GetPoint_AsyncWorker(
-MbControlData3D * _underlying,            Napi::Promise::Deferred const &d,
-                                 size_t  i);
-          virtual ~ControlData3D_GetPoint_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbControlData3D *_underlying;
+    size_t i;
 
-      private:
-MbControlData3D * _underlying;                         size_t  i;
+    MbCartPoint3D *p;
 
-                
-                 MbCartPoint3D * p;
-                
+    int resultType;
+};
 
-        int resultType;
-  };
+class ControlData3D_SetPoint_AsyncWorker : public PromiseWorker
+{
+  public:
+    ControlData3D_SetPoint_AsyncWorker(MbControlData3D *_underlying, Napi::Promise::Deferred const &d, size_t i,
+                                       MbCartPoint3D &p);
+    virtual ~ControlData3D_SetPoint_AsyncWorker(){};
 
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-  class ControlData3D_SetPoint_AsyncWorker : public PromiseWorker {
-      public:
-          ControlData3D_SetPoint_AsyncWorker(
-MbControlData3D * _underlying,            Napi::Promise::Deferred const &d,
-                                 size_t  i,
-                                 MbCartPoint3D & p);
-          virtual ~ControlData3D_SetPoint_AsyncWorker() {};
+  private:
+    MbControlData3D *_underlying;
+    size_t i;
+    MbCartPoint3D &p;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    bool _result;
 
-      private:
-MbControlData3D * _underlying;                         size_t  i;
-                         MbCartPoint3D & p;
+    int resultType;
+};
 
-                
-                 bool  _result;
-                
+class ControlData3D_TotalCount_AsyncWorker : public PromiseWorker
+{
+  public:
+    ControlData3D_TotalCount_AsyncWorker(MbControlData3D *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~ControlData3D_TotalCount_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    MbControlData3D *_underlying;
 
-  class ControlData3D_TotalCount_AsyncWorker : public PromiseWorker {
-      public:
-          ControlData3D_TotalCount_AsyncWorker(
-MbControlData3D * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~ControlData3D_TotalCount_AsyncWorker() {};
+    size_t _result;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    int resultType;
+};
 
-      private:
-MbControlData3D * _underlying;
-                
-                 size_t  _result;
-                
+class ControlData3D_ShareCount_AsyncWorker : public PromiseWorker
+{
+  public:
+    ControlData3D_ShareCount_AsyncWorker(MbControlData3D *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~ControlData3D_ShareCount_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    MbControlData3D *_underlying;
 
-  class ControlData3D_ShareCount_AsyncWorker : public PromiseWorker {
-      public:
-          ControlData3D_ShareCount_AsyncWorker(
-MbControlData3D * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~ControlData3D_ShareCount_AsyncWorker() {};
+    size_t _result;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    int resultType;
+};
 
-      private:
-MbControlData3D * _underlying;
-                
-                 size_t  _result;
-                
+class ControlData3D_ResetIndex_AsyncWorker : public PromiseWorker
+{
+  public:
+    ControlData3D_ResetIndex_AsyncWorker(MbControlData3D *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~ControlData3D_ResetIndex_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    MbControlData3D *_underlying;
 
-  class ControlData3D_ResetIndex_AsyncWorker : public PromiseWorker {
-      public:
-          ControlData3D_ResetIndex_AsyncWorker(
-MbControlData3D * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~ControlData3D_ResetIndex_AsyncWorker() {};
-
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
-
-      private:
-MbControlData3D * _underlying;
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

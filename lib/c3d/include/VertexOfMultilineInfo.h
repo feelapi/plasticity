@@ -11,25 +11,19 @@
 
 #include "PromiseWorker.h"
 
-class VertexOfMultilineInfo : public
-  Napi::ObjectWrap<VertexOfMultilineInfo>
+class VertexOfMultilineInfo : public Napi::ObjectWrap<VertexOfMultilineInfo>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, StVertexOfMultilineInfo *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        VertexOfMultilineInfo(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, StVertexOfMultilineInfo *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    VertexOfMultilineInfo(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    StVertexOfMultilineInfo * _underlying;
-
-
+    StVertexOfMultilineInfo *_underlying;
 
   private:
-
 };
-
-
 
 #endif

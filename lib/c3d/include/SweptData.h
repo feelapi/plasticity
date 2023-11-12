@@ -15,25 +15,19 @@
 #include "Contour3D.h"
 #include "PromiseWorker.h"
 
-class SweptData : public
-  Napi::ObjectWrap<SweptData>
+class SweptData : public Napi::ObjectWrap<SweptData>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbSweptData *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        SweptData(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbSweptData *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    SweptData(const Napi::CallbackInfo &info);
 
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbSweptData * _underlying;
-
-
+    MbSweptData *_underlying;
 
   private:
-
 };
-
-
 
 #endif

@@ -14,39 +14,31 @@
 
 #include "PromiseWorker.h"
 
-class Registrator : public
-  Napi::ObjectWrap<Registrator>
+class Registrator : public Napi::ObjectWrap<Registrator>
 {
   public:
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+    static Napi::Object Init(Napi::Env env, Napi::Object exports);
 
-        static Napi::Value AutoReg(const Napi::CallbackInfo& info);
-        static Napi::Value AutoReg_async(const Napi::CallbackInfo& info);
+    static Napi::Value AutoReg(const Napi::CallbackInfo &info);
+    static Napi::Value AutoReg_async(const Napi::CallbackInfo &info);
 };
 
+class Registrator_AutoReg_AsyncWorker : public PromiseWorker
+{
+  public:
+    Registrator_AutoReg_AsyncWorker(Napi::Promise::Deferred const &d);
+    virtual ~Registrator_AutoReg_AsyncWorker(){};
 
-  class Registrator_AutoReg_AsyncWorker : public PromiseWorker {
-      public:
-          Registrator_AutoReg_AsyncWorker(
-            Napi::Promise::Deferred const &d);
-          virtual ~Registrator_AutoReg_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbAutoRegDuplicate *autoReg;
 
-      private:
+    MbRegDuplicate *iReg;
 
-                
-                 MbAutoRegDuplicate * autoReg;
-                
-                
-                 MbRegDuplicate * iReg;
-                
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif

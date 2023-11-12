@@ -12,134 +12,120 @@
 #include "NameMaker.h"
 #include "PromiseWorker.h"
 
-class SNameMaker : public
-  Napi::ObjectWrap<SNameMaker>
+class SNameMaker : public Napi::ObjectWrap<SNameMaker>
 {
   public:
-        static Napi::Object Init(const Napi::Env env, Napi::Object exports);
-        static Napi::Object NewInstance(const Napi::Env env, MbSNameMaker *raw);
-        static Napi::Function GetConstructor(Napi::Env env);
-        SNameMaker(const Napi::CallbackInfo& info);
+    static Napi::Object Init(const Napi::Env env, Napi::Object exports);
+    static Napi::Object NewInstance(const Napi::Env env, MbSNameMaker *raw);
+    static Napi::Function GetConstructor(Napi::Env env);
+    SNameMaker(const Napi::CallbackInfo &info);
 
-         Napi::Value Add(const Napi::CallbackInfo& info);
-         Napi::Value Add_async(const Napi::CallbackInfo& info);
-         Napi::Value IsChild(const Napi::CallbackInfo& info);
-         Napi::Value IsChild_async(const Napi::CallbackInfo& info);
-         Napi::Value GetMainName(const Napi::CallbackInfo& info);
-         Napi::Value GetMainName_async(const Napi::CallbackInfo& info);
-         Napi::Value GetUseCount(const Napi::CallbackInfo& info);
-         Napi::Value GetUseCount_async(const Napi::CallbackInfo& info);
-         Napi::Value AddRef(const Napi::CallbackInfo& info);
-         Napi::Value AddRef_async(const Napi::CallbackInfo& info);
-        Napi::Value Id(const Napi::CallbackInfo& info);
+    Napi::Value Add(const Napi::CallbackInfo &info);
+    Napi::Value Add_async(const Napi::CallbackInfo &info);
+    Napi::Value IsChild(const Napi::CallbackInfo &info);
+    Napi::Value IsChild_async(const Napi::CallbackInfo &info);
+    Napi::Value GetMainName(const Napi::CallbackInfo &info);
+    Napi::Value GetMainName_async(const Napi::CallbackInfo &info);
+    Napi::Value GetUseCount(const Napi::CallbackInfo &info);
+    Napi::Value GetUseCount_async(const Napi::CallbackInfo &info);
+    Napi::Value AddRef(const Napi::CallbackInfo &info);
+    Napi::Value AddRef_async(const Napi::CallbackInfo &info);
+    Napi::Value Id(const Napi::CallbackInfo &info);
 
-    MbSNameMaker * _underlying;
+    MbSNameMaker *_underlying;
 
     ~SNameMaker();
 
-
   private:
-
 };
 
+class SNameMaker_Add_AsyncWorker : public PromiseWorker
+{
+  public:
+    SNameMaker_Add_AsyncWorker(MbSNameMaker *_underlying, Napi::Promise::Deferred const &d, const SimpleName &ent);
+    virtual ~SNameMaker_Add_AsyncWorker(){};
 
-  class SNameMaker_Add_AsyncWorker : public PromiseWorker {
-      public:
-          SNameMaker_Add_AsyncWorker(
-MbSNameMaker * _underlying,            Napi::Promise::Deferred const &d,
-                                const SimpleName & ent);
-          virtual ~SNameMaker_Add_AsyncWorker() {};
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+  private:
+    MbSNameMaker *_underlying;
+    const SimpleName &ent;
 
-      private:
-MbSNameMaker * _underlying;                        const SimpleName & ent;
+    int resultType;
+};
 
+class SNameMaker_IsChild_AsyncWorker : public PromiseWorker
+{
+  public:
+    SNameMaker_IsChild_AsyncWorker(MbSNameMaker *_underlying, Napi::Promise::Deferred const &d,
+                                   const MbTopologyItem &t);
+    virtual ~SNameMaker_IsChild_AsyncWorker(){};
 
-        int resultType;
-  };
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
+  private:
+    MbSNameMaker *_underlying;
+    const MbTopologyItem &t;
 
-  class SNameMaker_IsChild_AsyncWorker : public PromiseWorker {
-      public:
-          SNameMaker_IsChild_AsyncWorker(
-MbSNameMaker * _underlying,            Napi::Promise::Deferred const &d,
-                                const MbTopologyItem & t);
-          virtual ~SNameMaker_IsChild_AsyncWorker() {};
+    bool _result;
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+    int resultType;
+};
 
-      private:
-MbSNameMaker * _underlying;                        const MbTopologyItem & t;
+class SNameMaker_GetMainName_AsyncWorker : public PromiseWorker
+{
+  public:
+    SNameMaker_GetMainName_AsyncWorker(MbSNameMaker *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~SNameMaker_GetMainName_AsyncWorker(){};
 
-                
-                 bool  _result;
-                
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-        int resultType;
-  };
+  private:
+    MbSNameMaker *_underlying;
 
+    SimpleName _result;
 
-  class SNameMaker_GetMainName_AsyncWorker : public PromiseWorker {
-      public:
-          SNameMaker_GetMainName_AsyncWorker(
-MbSNameMaker * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~SNameMaker_GetMainName_AsyncWorker() {};
+    int resultType;
+};
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+class SNameMaker_GetUseCount_AsyncWorker : public PromiseWorker
+{
+  public:
+    SNameMaker_GetUseCount_AsyncWorker(MbSNameMaker *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~SNameMaker_GetUseCount_AsyncWorker(){};
 
-      private:
-MbSNameMaker * _underlying;
-                
-                 SimpleName  _result;
-                
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-        int resultType;
-  };
+  private:
+    MbSNameMaker *_underlying;
 
+    refcount_t _result;
 
-  class SNameMaker_GetUseCount_AsyncWorker : public PromiseWorker {
-      public:
-          SNameMaker_GetUseCount_AsyncWorker(
-MbSNameMaker * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~SNameMaker_GetUseCount_AsyncWorker() {};
+    int resultType;
+};
 
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
+class SNameMaker_AddRef_AsyncWorker : public PromiseWorker
+{
+  public:
+    SNameMaker_AddRef_AsyncWorker(MbSNameMaker *_underlying, Napi::Promise::Deferred const &d);
+    virtual ~SNameMaker_AddRef_AsyncWorker(){};
 
-      private:
-MbSNameMaker * _underlying;
-                
-                 refcount_t  _result;
-                
+    void Execute() override;
+    void Resolve(Napi::Promise::Deferred const &deferred) override;
+    void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
 
-        int resultType;
-  };
+  private:
+    MbSNameMaker *_underlying;
 
-
-  class SNameMaker_AddRef_AsyncWorker : public PromiseWorker {
-      public:
-          SNameMaker_AddRef_AsyncWorker(
-MbSNameMaker * _underlying,            Napi::Promise::Deferred const &d);
-          virtual ~SNameMaker_AddRef_AsyncWorker() {};
-
-          void Execute() override;
-          void Resolve(Napi::Promise::Deferred const &deferred) override;
-          void Reject(Napi::Promise::Deferred const &deferred, Napi::Error const &error) override;
-
-      private:
-MbSNameMaker * _underlying;
-
-        int resultType;
-  };
-
-
+    int resultType;
+};
 
 #endif
