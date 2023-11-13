@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="第 1 页" id="vkjvNKrcprwjGzqFDWzI">
-        <mxGraphModel dx="1703" dy="891" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+        <mxGraphModel dx="1812" dy="891" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -50,7 +50,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="UZOX3ZNRrXYdsYe5lXyL" name="database">
-        <mxGraphModel dx="3288" dy="1291" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="2310" dy="896" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -172,7 +172,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="tGB4PUcK_2OR0BfiuK4n" name="Visual Model">
-        <mxGraphModel dx="4088" dy="1691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="3430" dy="1519" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -457,8 +457,8 @@
                 <mxCell id="TJZIkAFwUbVVsYxBvIxL-6" value="Face/Edge/Vertex" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="790" y="145" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="TJZIkAFwUbVVsYxBvIxL-8" value="simpleName = Itemid + topologyId : string" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="920" y="160" width="240" height="30" as="geometry"/>
+                <mxCell id="TJZIkAFwUbVVsYxBvIxL-8" value="simpleName = Itemid + topolygoClass+topologyId : string" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="675" y="210" width="330" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="TJZIkAFwUbVVsYxBvIxL-9" value="Body(Brep)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="480" y="145" width="120" height="60" as="geometry"/>
