@@ -1,0 +1,875 @@
+FacetOptions
+{
+	CurveChordTolerance();
+	Incremental();
+	MatchTopology();
+	MaxSides();
+	MaxWidth();
+	MinWidth();
+	PlaneAngle();
+	PlaneTolerance();
+	SurfacePlaneAngle();
+	SurfacePlaneTolerance();
+	constructor();
+}
+
+PartitionMark
+{
+	Goto();
+	constructor();
+}
+
+Entity
+{
+	Exists();
+	GetIdentifier();
+	GetPartition();
+	Id();
+	constructor();
+}
+
+Partition
+{
+	BCurve();
+	Body();
+	Circle();
+	Clone();
+	Copy();
+	Copy_async();
+	CreateMark();
+	GetBodies();
+	Id();
+	Line();
+	Plane();
+	Save();
+	SheetBody();
+	SolidBody();
+	Transform();
+	WireBody();
+	constructor();
+}
+
+SessionMark
+{
+	Goto();
+	constructor();
+}
+
+SingleUsePartitionMark
+{
+	Goto();
+	constructor();
+}
+
+Vector
+{
+	Add();
+	ApplyMatrix();
+	Copy();
+	Cross();
+	DistanceTo();
+	Dot();
+	Length();
+	LengthSquared();
+	ManhattanLength();
+	MultiplyScalar();
+	Normalize();
+	Set();
+	Sub();
+	constructor();
+	x();
+	y();
+	z();
+}
+
+Session
+{
+	CreateMark();
+	DebugStart();
+	DebugStop();
+	GetCurrentPartition();
+	GetMemoryUsage();
+	GetMemoryUsage_async();
+	Init();
+	TriggerUserInterrupt();
+	constructor();
+}
+
+Axis
+{
+	Direction();
+	Location();
+	constructor();
+}
+
+Ray
+{
+	constructor();
+}
+
+Basis
+{
+	CreateFromThreePoints();
+	Axis();
+	DistanceToPoint();
+	GetMatrixTo();
+	GetPointInto();
+	GetPointOutOf();
+	Location();
+	ProjectPoint();
+	Ref();
+	constructor();
+}
+
+Box
+{
+	constructor();
+}
+
+Matrix
+{
+	Get();
+	Invert();
+	Set();
+	constructor();
+}
+
+Quaternion
+{
+	constructor();
+}
+
+Transform
+{
+	CreateEqualScale();
+	CreateFromMatrix();
+	CreateReflection();
+	CreateRotation();
+	CreateTranslation();
+	GetMatrix();
+	constructor();
+}
+
+Surface : Geometry : Entity
+{
+	Exists();
+}
+
+Geometry : Entity
+{
+	Exists();
+}
+
+Plane : Surface : Geometry : Entity
+{
+	Create();
+	Exists();
+}
+
+Curve : Geometry : Entity
+{
+	Exists();
+}
+
+Circle : Curve : Geometry : Entity
+{
+	Create();
+	CreateFromThreePoints();
+	CreateFromTwoPointsAndAngle();
+	Exists();
+}
+
+WireBodyCreateFromEdgesTrackRecord
+{
+	GetOriginalBoundary();
+	constructor();
+}
+
+SheetBodyMakeFromFacesTrackRecord
+{
+	GetOriginalBoundary();
+	constructor();
+}
+
+OffsetFaceLoopsTrackRecord
+{
+	GetNewFaces();
+	constructor();
+}
+
+ImprintWiresTrackRecord
+{
+	GetNewFaces();
+	constructor();
+}
+
+FaceChangeTrackRecord
+{
+	GetChangedFaces();
+	constructor();
+}
+
+BlendEdgesTrackRecord
+{
+	GetBlendFaces();
+	constructor();
+}
+
+TransformControlPointsTrackRecord
+{
+	GetChangedVertices();
+	GetChangedVertices_async();
+	constructor();
+}
+
+CurveRebuildOptions
+{
+	Tmax();
+	Tmin();
+	constructor();
+}
+
+SweptToolOptions
+{
+	constructor();
+}
+
+BodyIntersectionCurveOptions
+{
+	constructor();
+}
+
+CreateSplineOptions
+{
+	Degree();
+	DerivativeConditions();
+	IsPeriodic();
+	Through();
+	constructor();
+}
+
+BodyArrayOptions
+{
+	Count1();
+	Count2();
+	Transform1();
+	Transform2();
+	constructor();
+}
+
+BCurve : Curve : Geometry : Entity
+{
+	CreateSpline();
+	Exists();
+}
+
+Line : Curve : Geometry : Entity
+{
+	CreateFromOriginAndDirection();
+	Exists();
+}
+
+ICurve : Curve : Geometry : Entity
+{
+	Exists();
+}
+
+Ellipse : Curve : Geometry : Entity
+{
+	Exists();
+}
+
+SPCurve : Curve : Geometry : Entity
+{
+	Exists();
+}
+
+FaceChangeBlendOperation
+{
+	Mode();
+	Radius();
+	constructor();
+}
+
+FaceChangeReplaceOperation
+{
+	constructor();
+}
+
+FaceChangeOffsetOperation
+{
+	constructor();
+}
+
+FaceChangeDraftOperation
+{
+	constructor();
+}
+
+FaceChangeTransformOperation
+{
+	Step();
+	constructor();
+}
+
+EdgeChangeTransformOperation
+{
+	Step();
+	constructor();
+}
+
+OffsetEdgeOptions
+{
+	GapFill();
+	constructor();
+}
+
+OffsetFaceLoopOptions
+{
+	GapFill();
+	IsIndividual();
+	constructor();
+}
+
+CreateSolidFromFacesOptions
+{
+	Heal();
+	constructor();
+}
+
+FaceChangeOptions
+{
+	Grow();
+	constructor();
+}
+
+Face : Entity
+{
+	Exists();
+}
+
+EdgeBlendVariationPoint
+{
+	Position();
+	PrimarySize();
+	Rho();
+	SecondarySize();
+	constructor();
+}
+
+EdgeBlendLimitPoint
+{
+	Direction();
+	Edge();
+	Position();
+	constructor();
+}
+
+FaceBlendOptions
+{
+	constructor();
+}
+
+EdgeBlendOptions
+{
+	LimitPoints();
+	PreferredEdges();
+	Radius();
+	Shape();
+	VariationPoints();
+	constructor();
+}
+
+ExtrudeOptions
+{
+	Angle1();
+	Angle2();
+	End();
+	Start();
+	Thickness1();
+	Thickness2();
+	constructor();
+}
+
+SplineDerivativeCondition
+{
+	Derivatives();
+	constructor();
+}
+
+LoftFaceClamp
+{
+	Edges();
+	Faces();
+	Magnitudes();
+	constructor();
+}
+
+ExtrudeBoundary
+{
+	Bound();
+	Distance();
+	constructor();
+}
+
+LoftDerivativeCondition
+{
+	Curvature();
+	FaceClamp();
+	Type();
+	constructor();
+}
+
+ChamferOptions
+{
+	LimitPoints();
+	PreferredEdges();
+	constructor();
+}
+
+LoftOptions
+{
+	End();
+	IsPeriodic();
+	Start();
+	constructor();
+}
+
+FaceCollection
+{
+	Union();
+	Get();
+	GetChanged();
+	GetFaces();
+	GetIds();
+	GetMidpoints();
+	GetMidpoints_async();
+	GetOriginals();
+	GetOriginals_async();
+	Planar();
+	Size();
+	Sort();
+	constructor();
+}
+
+SectionOptions
+{
+	constructor();
+}
+
+OrientedEdge : Entity
+{
+	Exists();
+}
+
+Loop : Entity
+{
+	Exists();
+}
+
+Vertex : Entity
+{
+	Exists();
+}
+
+Edge : Entity
+{
+	Exists();
+}
+
+CVCollection
+{
+	EvalBasis();
+	GetBuffer();
+	GetCentroid();
+	GetHullSegments();
+	GetIds();
+	GetIndex();
+	GetPoints();
+	Size();
+	Slice();
+	Transform();
+	constructor();
+}
+
+PointCollection
+{
+	AllLieOnPlane();
+	GetBuffer();
+	GetPoints();
+	Size();
+	constructor();
+}
+
+VertexCollection
+{
+	FindMatchingEdges();
+	Get();
+	GetCentroid();
+	GetIds();
+	GetPoints();
+	GetVertices();
+	Size();
+	Slice();
+	Sort();
+	Transform();
+	Zip();
+	constructor();
+}
+
+CurveCollection
+{
+	Get();
+	GetIds();
+	Size();
+	constructor();
+}
+
+EdgeCollection
+{
+	Circular();
+	Circular_async();
+	FindConnectedLaminar();
+	FindConnectedTangent();
+	FindOrderedVertices();
+	FindParallel();
+	Get();
+	GetBases();
+	GetBases_async();
+	GetCVs();
+	GetCentroid();
+	GetEdges();
+	GetIds();
+	GetIntervals();
+	GetOriginals();
+	GetOriginals_async();
+	GetPoints();
+	GetPoints_async();
+	GetPrimaryAndSecondaryFaces();
+	InsertMatchingVertex();
+	IntersectEdges();
+	IntersectEdges_async();
+	IsClosed();
+	IsLaminar();
+	Size();
+	Slice();
+	Sort();
+	SortChains();
+	constructor();
+}
+
+TransformOptions
+{
+	constructor();
+}
+
+ClashOptions
+{
+	constructor();
+}
+
+BooleanOptions
+{
+	Operation();
+	TargetMaterialSide();
+	ToolMaterialSide();
+	constructor();
+}
+
+FaceDissolveOptions
+{
+	Heal();
+	constructor();
+}
+
+FaceDeleteOptions
+{
+	constructor();
+}
+
+OffsetPlanarWireOptions
+{
+	GapFill();
+	constructor();
+}
+
+ProjectCurveOptions
+{
+	Bidirectional();
+	Complete();
+	Direction();
+	MaxDist();
+	Method();
+	Occlude();
+	constructor();
+}
+
+EdgeDeleteOptions
+{
+	constructor();
+}
+
+FaceIdentifyBlendsOptions
+{
+	constructor();
+}
+
+SweepOptions
+{
+	Alignment();
+	LockFaces();
+	Thickness();
+	Twist();
+	constructor();
+}
+
+SpinOptions
+{
+	constructor();
+}
+
+HollowOptions
+{
+	Grow();
+	Local();
+	constructor();
+}
+
+WireBodyCreateFromEdgesOptions
+{
+	Simplify();
+	Track();
+	constructor();
+}
+
+SewBodiesOptions
+{
+	constructor();
+}
+
+SheetBodyMakeFromFacesOptions
+{
+	DeleteRedundant();
+	Track();
+	constructor();
+}
+
+ThickenOptions
+{
+	constructor();
+}
+
+FillHoleOptions
+{
+	FillPreference();
+	InternalSmoothness();
+	Smoothness();
+	SupportBodies();
+	constructor();
+}
+
+SheetBodyExtendOptions
+{
+	Distance();
+	Shape();
+	Type();
+	constructor();
+}
+
+Body : Entity
+{
+	Deserialize();
+	Deserialize_async();
+	Exists();
+}
+
+BodyCollection
+{
+	Boolean();
+	Boolean_async();
+	Clash();
+	ClashWithSelf();
+	ClashWithSelf_async();
+	Clash_async();
+	FindPlanarBases();
+	FindPlanarBases_async();
+	GetBodies();
+	GetCentroid();
+	GetIds();
+	GetOriginals();
+	GetOriginals_async();
+	Size();
+	SplitAtIntersections();
+	SplitAtIntersections_async();
+	constructor();
+}
+
+ProfileCollection
+{
+	Create();
+	Create_async();
+	GetPathVertices();
+	GetProfileVertices();
+	Loft();
+	Loft_async();
+	constructor();
+}
+
+ShellBody : Body : Entity
+{
+	Deserialize();
+	Deserialize_async();
+	Exists();
+}
+
+SolidBody : ShellBody : Body : Entity
+{
+	CreateBlock();
+	CreateCylinder();
+	CreateSphere();
+	Deserialize();
+	Deserialize_async();
+	Exists();
+}
+
+SheetBody : ShellBody : Body : Entity
+{
+	CreateCircle();
+	CreatePolygon();
+	CreateRectangle();
+	Deserialize();
+	Deserialize_async();
+	Exists();
+	MakeFaceBlend();
+	MakeFromFaces();
+	MakeFromFaces_async();
+	MakeFromSurface();
+	MakeFromSurfaceTrimmed();
+	Sew();
+	Sew_async();
+}
+
+WireBody : Body : Entity
+{
+	CreateCircle();
+	CreateFromCurves();
+	CreateFromEdges();
+	CreateFromEdges_async();
+	CreateHelix();
+	CreateLine();
+	CreatePolygon();
+	CreatePolyline();
+	Deserialize();
+	Deserialize_async();
+	Exists();
+}
+
+RegionBody : SheetBody : ShellBody : Body : Entity
+{
+	CreateCircle();
+	CreatePolygon();
+	CreateRectangle();
+	Deserialize();
+	Deserialize_async();
+	Exists();
+	MakeFaceBlend();
+	MakeFromFaces();
+	MakeFromFaces_async();
+	MakeFromSurface();
+	MakeFromSurfaceTrimmed();
+	Sew();
+	Sew_async();
+}
+
+IntersectWithAllResult
+{
+	GetIntersectedBodies();
+	Split();
+	constructor();
+}
+
+Sketch
+{
+	Add();
+	Clone();
+	GetBasis();
+	GetRegions();
+	Id();
+	IsEmpty();
+	RemoveAndAdd();
+	RemoveAndAdd_async();
+	constructor();
+}
+
+FacetFacesAndEdgesResult
+{
+	Merge();
+	RaycastEdges();
+	RaycastFaces();
+	constructor();
+	edge();
+	edgeBBox();
+	edgeGroup();
+	edgePosition();
+	face();
+	faceBBox();
+	faceFacet();
+	faceGroup();
+	faceIndex();
+	faceNormal();
+	faceOrder();
+	facePosition();
+}
+
+FacetEdgesResult
+{
+	bbox();
+	constructor();
+	edge();
+	group();
+	position();
+}
+
+Factory
+{
+	constructor();
+}
+
+BodyFactory : Factory
+{
+}
+
+PlaneFactory : Factory
+{
+}
+
+BCurveFactory : Factory
+{
+}
+
+CircleFactory : Factory
+{
+}
+
+LineFactory : Factory
+{
+}
+
+SolidBodyFactory : Factory
+{
+}
+
+SheetBodyFactory : Factory
+{
+}
+
+WireBodyFactory : Factory
+{
+}
+
+TransformFactory : Factory
+{
+}
+
+
+undefined
